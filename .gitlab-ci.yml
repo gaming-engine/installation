@@ -24,7 +24,7 @@ cache:
 # services such as redis or postgres
 before_script:
   # Install Composer and project dependencies.
-  - composer install
+  - COMPOSER_AUTH="$COMPOSER_AUTH" composer install
 
   # Install Node dependencies.
   # comment this out if you don't have a node dependency

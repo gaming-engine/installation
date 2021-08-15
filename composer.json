@@ -64,15 +64,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
 
-    "repositories": [
-        {
-            "name": "gaming-engine/core",
-            "type": "path",
-            "url": "../core",
-            "options": {
-                "symlink": true
-            },
-            "stability": "dev"
-        }
-    ]
+    "repositories": [{
+        "type": "composer",
+        "url": "https://gaming-engine.gitlab.io/packages/"
+    }]
 }
