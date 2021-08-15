@@ -8,6 +8,6 @@ class StartController extends Controller
 {
     public function __invoke()
     {
-        dd('hi');
+        return 'installer';
     }
 }
