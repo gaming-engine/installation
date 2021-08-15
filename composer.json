@@ -1,0 +1,78 @@
+{
+    "name": "gaming-engine/installation",
+    "description": "The initial installation utility for the Gaming Engine",
+    "keywords": [
+        "gaming-engine",
+        "laravel",
+        "installation"
+    ],
+    "homepage": "https://github.com/gaming-engine/installation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Judd",
+            "email": "awjudd@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0|^8.1",
+        "gaming-engine/core": "dev-main",
+        "illuminate/contracts": "^8.37",
+        "spatie/laravel-package-tools": "^1.4.3"
+    },
+    "require-dev": {
+        "brianium/paratest": "^6.2",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "nunomaduro/collision": "^5.3",
+        "orchestra/testbench": "^6.15",
+        "phpunit/phpunit": "^9.3",
+        "spatie/laravel-ray": "^1.9",
+        "vimeo/psalm": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "GamingEngine\\Installation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GamingEngine\\Installation\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/testbench package:test --parallel --no-coverage",
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html coverage",
+        "test:coverage:check": "XDEBUG_MODE=coverage phpunit && php coverage-checker.php ./build/clover.xml 80",
+        "test:coverage:show": "XDEBUG_MODE=coverage phpunit && cd build/coverage && serve .",
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GamingEngine\\Installation\\InstallationServiceProvider",
+                "GamingEngine\\Installation\\Providers\\RouteServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+
+    "repositories": [
+        {
+            "name": "gaming-engine/core",
+            "type": "path",
+            "url": "../core",
+            "options": {
+                "symlink": true
+            },
+            "stability": "dev"
+        }
+    ]
+}

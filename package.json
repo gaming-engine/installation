@@ -1,0 +1,55 @@
+{
+    "name": "gaming-engine-installation",
+    "version": "1.0.0",
+    "description": "Installer for the Gaming Engine",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prepare": "husky install",
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gaming-engine/installation.git"
+    },
+    "keywords": [
+        "gaming-engine"
+    ],
+    "author": "Andrew Judd",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://gitlab.com/gaming-engine/installation/issues"
+    },
+    "homepage": "https://gitlab.com/gaming-engine/installation#readme",
+    "devDependencies": {
+        "autoprefixer": "^10.3.1",
+        "axios": "^0.21.1",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.24.0",
+        "eslint-plugin-vue": "^7.16.0",
+        "husky": "^7.0.0",
+        "laravel-mix": "^6.0.6",
+        "lint-staged": "^11.0.0",
+        "lodash": "^4.17.19",
+        "moment": "^2.10.6",
+        "moment-timezone": "^0.5.21",
+        "postcss": "^8.3.6",
+        "prettier": "^2.3.2",
+        "vue": "^2.5.7",
+        "vue-json-pretty": "^1.6.2",
+        "vue-loader": "^15.9.6",
+        "vue-router": "^3.0.1",
+        "vue-template-compiler": "^2.5.21"
+    },
+    "dependencies": {
+        "@commitlint/cli": "^12.1.4",
+        "@commitlint/config-conventional": "^12.1.4"
+    }
+}
