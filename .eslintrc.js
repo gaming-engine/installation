@@ -13,7 +13,25 @@ module.exports = {
   },
   plugins: [
     'vue',
+    'prettier',
   ],
   rules: {
+    'max-len': [
+      'error',
+      {
+        ignorePattern: 'd="([\\s\\S]*?)"',
+      },
+    ],
   },
+  overrides: [
+    {
+      files: [
+        '**/*.spec.js',
+        '**/*.spec.jsx',
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };

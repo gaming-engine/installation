@@ -2,19 +2,22 @@
 
 namespace GamingEngine\Installation\Providers;
 
-use GamingEngine\Installation\Http\Controllers\StartController;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Route::prefix('install')
-            ->name('install.')
-            ->group(function () {
-                Route::get('/', StartController::class)
-                    ->name('index');
-            });
+        $this->routes(function () {
+            Route::prefix('api/v1/installation')
+                ->name('api.v1.installation')
+                ->group(__DIR__ . '/../../routes/api.php');
+
+            Route::middleware('web')
+                ->prefix('install')
+                ->name('install.')
+                ->group(__DIR__ . '/../../routes/web.php');
+        });
     }
 }

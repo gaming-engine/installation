@@ -46,3 +46,4 @@ test:
   script:
     - XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-text --colors=never
     - php coverage-checker.php build/clover.xml 80
+    - npm run test:coverage

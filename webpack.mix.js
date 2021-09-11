@@ -15,25 +15,34 @@ const path = require('path');
 
 const environment = mix.inProduction() ? 'prod' : 'local';
 
-mix.options({
-        terser: {
-            terserOptions: {
-                compress: {
-                    drop_console: true,
-                },
-            },
-        },
-    })
-    .setPublicPath(`dist/${environment}`)
-    .js('resources/js/app.js', 'public/js')
-    .vue()
-    .version()
-    .webpackConfig({
-        resolve: {
-            symlinks: false,
-            alias: {
-                '@': path.resolve(__dirname, 'resources/js/'),
-            },
-        },
-        plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
-    });
+const options = {
+  terser: {
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    },
+  },
+};
+
+if (process.env.HOT_RELOAD_DOMAIN) {
+  options.hmrOptions = {
+    host: process.env.HOT_RELOAD_DOMAIN,
+    port: process.env.HOT_RELOAD_PORT,
+  };
+}
+
+mix.options(options).extract()
+  .setPublicPath(`dist/${environment}`)
+  .js('resources/js/app.js', 'public/js')
+  .vue()
+  .version()
+  .webpackConfig({
+    resolve: {
+      symlinks: false,
+      alias: {
+        '@': path.resolve(__dirname, 'resources/js/'),
+      },
+    },
+    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
+  });

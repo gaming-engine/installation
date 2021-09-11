@@ -1,6 +1,6 @@
 <?php
 
-namespace GamingEngine\Installation\Tests\Http;
+namespace GamingEngine\Installation\Tests\Feature\Http\Controllers;
 
 use GamingEngine\Installation\Tests\TestCase;
 
@@ -12,6 +12,7 @@ class StartControllerTest extends TestCase
     public function start_controller_shows_the_installation_page()
     {
         // Arrange
+        $this->withoutMix();
 
         // Act
         $response = $this->get(route('install.index'));

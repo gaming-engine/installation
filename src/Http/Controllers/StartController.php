@@ -8,6 +8,6 @@ class StartController extends Controller
 {
     public function __invoke()
     {
-        return 'installer';
+        return view('gaming-engine:installation::installer');
     }
 }
