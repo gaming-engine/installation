@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Http\Resources\Api\V1\Requirements;
 
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**

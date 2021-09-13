@@ -2,8 +2,8 @@
 
 namespace GamingEngine\Installation\Http\Requests\Api\V1\DatabaseRequirements;
 
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
-use GamingEngine\Installation\Steps\DatabaseRequirements\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
 

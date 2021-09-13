@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Steps;
 
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
 use Illuminate\Support\Facades\Storage;
 
 abstract class BaseConfigurationStep extends BaseStep implements Step, ConfigurationStep

@@ -5,7 +5,7 @@ namespace GamingEngine\Installation\Tests\Feature\Api\V1\Requirements;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\ConfigurationResource;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\DatabaseRequirementResource;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\RequirementResource;
-use GamingEngine\Installation\Steps\DatabaseRequirements\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Steps\DatabaseRequirementsStep;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;

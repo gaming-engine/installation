@@ -2,10 +2,10 @@
 
 namespace GamingEngine\Installation\Http\Resources\Api\V1\Requirements;
 
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
-use GamingEngine\Installation\Steps\DatabaseRequirements\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Requirement;
 use GamingEngine\Installation\Steps\DatabaseRequirementsStep;
-use GamingEngine\Installation\Steps\Requirement;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 

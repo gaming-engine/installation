@@ -3,8 +3,8 @@
 namespace GamingEngine\Installation\Tests\Feature\Http\Requests\Api\V1\DatabaseRequirements;
 
 use GamingEngine\Installation\Http\Requests\Api\V1\DatabaseRequirements\OverrideRequest;
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
-use GamingEngine\Installation\Steps\DatabaseRequirements\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 

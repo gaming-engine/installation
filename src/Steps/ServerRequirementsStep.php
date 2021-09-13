@@ -2,9 +2,10 @@
 
 namespace GamingEngine\Installation\Steps;
 
-use GamingEngine\Installation\Steps\ServerRequirements\FileRequirements;
-use GamingEngine\Installation\Steps\ServerRequirements\FolderRequirements;
-use GamingEngine\Installation\Steps\ServerRequirements\PHPRequirements;
+use GamingEngine\Installation\Requirements\Requirement;
+use GamingEngine\Installation\Requirements\Server\FileRequirements;
+use GamingEngine\Installation\Requirements\Server\FolderRequirements;
+use GamingEngine\Installation\Requirements\Server\PHPRequirements;
 use Illuminate\Support\Collection;
 
 class ServerRequirementsStep extends BaseStep implements Step

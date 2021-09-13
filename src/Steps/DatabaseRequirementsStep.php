@@ -4,9 +4,10 @@ namespace GamingEngine\Installation\Steps;
 
 use GamingEngine\Installation\Database\ChecksDatabaseConnection;
 use GamingEngine\Installation\Models\Database\DatabaseConfiguration;
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
-use GamingEngine\Installation\Steps\DatabaseRequirements\ConnectsToDatabaseRequirement;
-use GamingEngine\Installation\Steps\DatabaseRequirements\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Database\ConnectsToDatabaseRequirement;
+use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Requirement;
 use Illuminate\Support\Collection;
 
 class DatabaseRequirementsStep extends BaseConfigurationStep implements Step

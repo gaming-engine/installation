@@ -2,6 +2,8 @@
 
 namespace GamingEngine\Installation\Steps;
 
+use GamingEngine\Installation\Requirements\Requirement;
+
 abstract class BaseStep implements Step
 {
     abstract public function identifier(): string;
