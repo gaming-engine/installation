@@ -47,7 +47,7 @@
                     bg-green-400 text-black
                 "
                 @click="refresh">
-                Refresh
+                {{ resources.button ?? 'Refresh' }}
             </button>
         </div>
     </div>
@@ -60,6 +60,7 @@ export default {
   name: 'server-requirements',
   data: () => ({
     checks: [],
+    resources: {},
     collapsed: {},
   }),
 
@@ -73,7 +74,10 @@ export default {
         await axios.get('/api/v1/installation/requirements/server')
       ).data;
 
-      this.checks = data;
+      const { validations, resources } = data;
+
+      this.checks = validations;
+      this.resources = resources;
       let allComplete = true;
 
       Object.entries(this.checks).forEach(

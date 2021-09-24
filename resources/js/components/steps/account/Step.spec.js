@@ -4,24 +4,12 @@ import Step from './Step.vue';
 
 jest.mock('axios');
 
-describe('database requirements step', () => {
+describe('account settings step', () => {
   const sampleConfigurations = {
-    engine: {
+    email: {
       name: 'foo',
       description: 'foo',
-      value: 'foo',
-      nullable: false,
-    },
-    host: {
-      name: 'foo',
-      description: 'foo',
-      value: 'foo',
-      nullable: false,
-    },
-    'database-name': {
-      name: 'foo',
-      description: 'foo',
-      value: 'foo',
+      value: 'bar',
       nullable: false,
     },
     username: {
@@ -33,13 +21,13 @@ describe('database requirements step', () => {
     password: {
       name: 'foo',
       description: 'foo',
-      value: 'foo',
+      value: 'foobar',
       nullable: false,
     },
   };
 
   const sampleValidations = {
-    connectivity: {
+    configurations: {
       is_complete: true,
     },
   };
@@ -51,9 +39,6 @@ describe('database requirements step', () => {
           data: {
             validations: [],
             configurations: {},
-            resources: {
-              button: 'hello',
-            },
           },
         },
       });
@@ -61,30 +46,12 @@ describe('database requirements step', () => {
       shallowMount(Step);
 
       expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/requirements/database',
+        '/api/v1/installation/requirements/account',
       );
     });
   });
 
   describe('computed', () => {
-    describe('database options', () => {
-      it('defaults the values', () => {
-        const { vm } = shallowMount(Step);
-
-        expect(vm.databaseOptions)
-          .toEqual([
-            {
-              value: 'mysql',
-              text: 'MySQL',
-            },
-            {
-              value: 'pgsql',
-              text: 'Postgres',
-            },
-          ]);
-      });
-    });
-
     describe('disabled', () => {
       it('is true if the state is not idle', () => {
         const { vm } = shallowMount(Step);
@@ -126,7 +93,7 @@ describe('database requirements step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/requirements/database',
+          '/api/v1/installation/requirements/account',
         );
       });
 
@@ -136,9 +103,7 @@ describe('database requirements step', () => {
             data: {
               validations: [],
               configurations: {},
-              resources: {
-                button: 'foo',
-              },
+              resources: {},
             },
           },
         });
@@ -148,7 +113,7 @@ describe('database requirements step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/requirements/database',
+          '/api/v1/installation/requirements/account',
         );
       });
     });
@@ -187,42 +152,17 @@ describe('database requirements step', () => {
           configurations: sampleConfigurations,
           validations: sampleValidations,
           resources: {
-            button: 'foo',
+            button: 'testing',
           },
         });
 
         expect(vm.form)
           .toEqual({
-            engine: 'foo',
-            host: 'foo',
-            'database-name': 'foo',
             username: 'foo',
-            password: 'foo',
+            email: 'bar',
+            password: 'foobar',
           });
       });
-
-      it('shows an alert if the database could not be connected to',
-        async () => {
-          const { vm } = shallowMount(Step);
-
-          vm.processResponse({
-            configurations: sampleConfigurations,
-            validations: {
-              ...sampleValidations,
-              connectivity: {
-                is_complete: false,
-              },
-            },
-            resources: {
-              button: 'hello',
-            },
-          });
-
-          await vm.$nextTick();
-
-          expect(vm.$refs.warning)
-            .toBeTruthy();
-        });
     });
   });
 });

@@ -2,30 +2,30 @@
 
 namespace GamingEngine\Installation\Tests\Feature\Requirements\Database;
 
-use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
-use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationValue;
+use GamingEngine\Installation\Requirements\Account\AccountConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Account\AccountConfigurationValue;
 use GamingEngine\Installation\Requirements\RequirementDetail;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 
-class DatabaseConfigurationRequirementsTest extends TestCase
+class AccountConfigurationRequirementsTest extends TestCase
 {
     use WithFaker;
 
     /**
      * @test
      */
-    public function database_configuration_requirements_name()
+    public function account_configuration_requirements_name()
     {
         // Arrange
-        $subject = new DatabaseConfigurationRequirements();
+        $subject = new AccountConfigurationRequirements();
 
         // Act
         $name = $subject->name();
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.database.configuration.name"),
+            __("gaming-engine:installation::requirements.account.configuration.name"),
             $name
         );
     }
@@ -33,17 +33,17 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_description()
+    public function account_configuration_requirements_description()
     {
         // Arrange
-        $subject = new DatabaseConfigurationRequirements();
+        $subject = new AccountConfigurationRequirements();
 
         // Act
         $name = $subject->description();
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.database.configuration.description"),
+            __("gaming-engine:installation::requirements.account.configuration.description"),
             $name
         );
     }
@@ -51,10 +51,10 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_identifier()
+    public function account_configuration_requirements_identifier()
     {
         // Arrange
-        $subject = new DatabaseConfigurationRequirements();
+        $subject = new AccountConfigurationRequirements();
 
         // Act
 
@@ -68,10 +68,10 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_has_components()
+    public function account_configuration_requirements_has_components()
     {
         // Arrange
-        $subject = new DatabaseConfigurationRequirements();
+        $subject = new AccountConfigurationRequirements();
 
         // Act
         $response = $subject->components();
@@ -86,21 +86,21 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_overrides_are_applied()
+    public function account_configuration_requirements_overrides_are_applied()
     {
         // Arrange
-        $subject = new DatabaseConfigurationRequirements([
-            'engine' => $engine = $this->faker->slug,
+        $subject = new AccountConfigurationRequirements([
+            'email' => $email = $this->faker->email,
         ]);
 
         // Act
         $response = $subject->components()
-            ->first(fn (DatabaseConfigurationValue $value) => $value->attribute() === 'engine');
+            ->first(fn (AccountConfigurationValue $value) => $value->attribute() === 'email');
 
         // Assert
         $this->assertNotNull($response);
         $this->assertEquals(
-            $engine,
+            $email,
             $response->value()
         );
     }
@@ -108,11 +108,11 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_check_returns_false_if_some_are_incomplete()
+    public function account_configuration_requirements_check_returns_false_if_some_are_incomplete()
     {
         // Arrange
         $subject = $this->createStub(
-            DatabaseConfigurationRequirements::class,
+            AccountConfigurationRequirements::class,
         );
 
         $subject->method('components')
@@ -133,11 +133,11 @@ class DatabaseConfigurationRequirementsTest extends TestCase
     /**
      * @test
      */
-    public function database_configuration_requirements_check_returns_true_if_some_are_complete()
+    public function account_configuration_requirements_check_returns_true_if_some_are_complete()
     {
         // Arrange
         $subject = $this->createPartialMock(
-            DatabaseConfigurationRequirements::class,
+            AccountConfigurationRequirements::class,
             [
                 'components',
             ]

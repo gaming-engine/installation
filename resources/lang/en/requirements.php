@@ -1,6 +1,26 @@
 <?php
 return [
+    "account" => [
+        "button" => "Save",
+        "configuration" => [
+            "description" => "Set up the default account details.",
+            "email" => [
+                "description" => "What is the email address for the default administrator account?",
+                "name" => "Email Address",
+            ],
+            "name" => "Account Details",
+            "password" => [
+                "description" => "What is the password for the default administrator account?",
+                "name" => "Password",
+            ],
+            "username" => [
+                "description" => "What is the username for the default administrator account?",
+                "name" => "Username",
+            ],
+        ],
+    ],
     "database" => [
+        "button" => "Test Connection",
         "configuration" => [
             "database-name" => ["description" => "The name of your database", "name" => "Database Name"],
             "description" => "Settings for your database connection.",
@@ -16,6 +36,7 @@ return [
             "password" => [
                 "description" => "The password used to connect to the database.",
                 "name" => "Database Password",
+                "warning" => "Although not mandatory, it is strongly suggested that you have a password for your database account.",
             ],
             "username" => [
                 "description" => "The username used to connect to the database.",
@@ -26,9 +47,12 @@ return [
             "description" => "Unable to connect to the database with the specified credentials.",
             "name" => "Database Connectivity",
         ],
+        "description" => "In order to run the site, a database is required to store all of the information.",
         "name" => "Database Requirements",
     ],
     "server" => [
+        "button" => "Refresh",
+        "description" => "These are the main requirements for your server to have in order for the Gaming Engine to work properly.",
         "file" => [
             "description" => "Describes all of the files (and their related permissions) required to run the application.",
             "existence" => ["message" => ":name file must exist (:path)."],
@@ -50,5 +74,16 @@ return [
             "name" => "PHP Requirements (current version: :version)",
             "version" => ["message" => "PHP version must be :version or higher."],
         ],
+    ],
+    "settings" => [
+        "description" => "Customize your site",
+        "language" => [
+            "description" => "What would you like the primary language for your site to be in?",
+            "en" => ["name" => "English"],
+            "es" => ["name" => "Spanish"],
+            "fr" => ["name" => "French"],
+            "name" => "Language",
+        ],
+        "name" => "Settings",
     ],
 ];

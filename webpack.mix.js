@@ -34,7 +34,7 @@ if (process.env.HOT_RELOAD_DOMAIN) {
 
 mix.options(options).extract()
   .setPublicPath(`dist/${environment}`)
-  .js('resources/js/app.js', 'public/js')
+  .js('resources/js/app.js', '/js')
   .vue()
   .version()
   .webpackConfig({

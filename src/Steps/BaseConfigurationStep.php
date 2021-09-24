@@ -2,10 +2,9 @@
 
 namespace GamingEngine\Installation\Steps;
 
-use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
 use Illuminate\Support\Facades\Storage;
 
-abstract class BaseConfigurationStep extends BaseStep implements Step, ConfigurationStep
+abstract class BaseConfigurationStep extends BaseStep implements ConfigurationStep
 {
     /**
      * @var ConfigurationValue[]
@@ -25,11 +24,6 @@ abstract class BaseConfigurationStep extends BaseStep implements Step, Configura
         }
     }
 
-    private function overrideFile(): string
-    {
-        return 'installation/' . md5(static::class);
-    }
-
     public function override(array $overrides)
     {
         $this->overrides = $overrides;
@@ -40,13 +34,13 @@ abstract class BaseConfigurationStep extends BaseStep implements Step, Configura
         );
     }
 
-    public function identifier(): string
-    {
-        return 'configuration';
-    }
-
     public function overrides(): array
     {
         return $this->overrides;
+    }
+
+    private function overrideFile(): string
+    {
+        return 'installation/' . md5(static::class);
     }
 }

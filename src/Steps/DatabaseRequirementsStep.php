@@ -4,7 +4,7 @@ namespace GamingEngine\Installation\Steps;
 
 use GamingEngine\Installation\Database\ChecksDatabaseConnection;
 use GamingEngine\Installation\Models\Database\DatabaseConfiguration;
-use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use GamingEngine\Installation\Requirements\Database\ConnectsToDatabaseRequirement;
 use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Requirements\Requirement;
@@ -45,8 +45,8 @@ class DatabaseRequirementsStep extends BaseConfigurationStep implements Step
                 $this->databaseConnection,
                 new DatabaseConfiguration(
                     $databaseConfiguration->components()
-                        ->keyBy(fn (ConfigurationValue $value) => $value->attribute())
-                        ->map(fn (ConfigurationValue $value) => $value->value())
+                        ->keyBy(fn (EnvironmentConfigurationValue $value) => $value->attribute())
+                        ->map(fn (EnvironmentConfigurationValue $value) => $value->value())
                         ->toArray()
                 )
             ),

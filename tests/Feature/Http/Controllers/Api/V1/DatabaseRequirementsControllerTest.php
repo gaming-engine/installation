@@ -68,7 +68,7 @@ class DatabaseRequirementsControllerTest extends TestCase
         $response->assertOk();
         $this->assertCount(
             $requirements->checks()->count(),
-            $response->json('data')
+            $response->json('data.validations')
         );
         $requirements
             ->checks()
@@ -143,7 +143,7 @@ class DatabaseRequirementsControllerTest extends TestCase
         $response->assertOk();
         $this->assertCount(
             $requirements->checks()->count(),
-            $response->json('data')
+            $response->json('data.validations')
         );
         $requirements
             ->checks()

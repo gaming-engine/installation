@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Http\Requests\Api\V1\DatabaseRequirements;
 
-use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
@@ -12,13 +12,13 @@ class OverrideRequest extends FormRequest
     public function rules(): array
     {
         return $this->configurationValues()
-            ->keyBy(fn (ConfigurationValue $value) => $value->attribute())
-            ->map(fn (ConfigurationValue $value) => $this->deriveRules($value))
+            ->keyBy(fn (EnvironmentConfigurationValue $value) => $value->attribute())
+            ->map(fn (EnvironmentConfigurationValue $value) => $this->deriveRules($value))
             ->toArray();
     }
 
     /**
-     * @return Collection<ConfigurationValue>
+     * @return Collection<EnvironmentConfigurationValue>
      */
     private function configurationValues(): Collection
     {
@@ -31,7 +31,7 @@ class OverrideRequest extends FormRequest
         return app(DatabaseConfigurationRequirements::class);
     }
 
-    private function deriveRules(ConfigurationValue $value): array
+    private function deriveRules(EnvironmentConfigurationValue $value): array
     {
         return array_filter([
             $value->nullable() ? 'nullable' : 'required',

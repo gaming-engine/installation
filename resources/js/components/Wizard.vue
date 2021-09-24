@@ -63,7 +63,9 @@
                                 'text-white': isStepComplete(step),
                                 'text-gray-600': !isStepComplete(step),
                             }" class="text-center w-full">
-                                <component :is="`${step.identifier}-icon`">Hi</component>
+                                <component :is="`${step.identifier}-icon`">{{
+                                        step.identifier[0].toUpperCase()
+                                    }}</component>
                             </span>
                         </div>
 
@@ -80,7 +82,9 @@
             <div v-for="step in steps"
                  v-show="step.identifier === current.identifier"
                  :key="`step-${step.identifier}-step`">
-                <h2 class="text-center d-block pb-5 font-bold text-lg">{{ step.name }}</h2>
+                <h2 class="text-center d-block pb-5 font-bold text-lg">
+                    {{ step.name }}
+                </h2>
 
                 <component
                     :is="`${step.identifier}-step`"
@@ -112,9 +116,12 @@
                     <button
                         v-if="hasNextStep"
                         :class="{
-                            'bg-blue-600 text-white': canGoToNextStep,
-                            'hover:bg-blue-300 hover:text-gray': canGoToNextStep,
-                            'bg-gray-100 text-gray-500': !canGoToNextStep
+                            'bg-blue-600': canGoToNextStep,
+                            'text-white': canGoToNextStep,
+                            'hover:bg-blue-300': canGoToNextStep,
+                            'hover:text-gray': canGoToNextStep,
+                            'bg-gray-100': !canGoToNextStep,
+                            'text-gray-500': !canGoToNextStep
                         }"
                         class="
                             inline-flex
@@ -219,6 +226,10 @@ export default {
       return this.steps.findIndex(
         (s) => step.identifier === s.identifier,
       );
+    },
+
+    canNavigateTo(step) {
+      return this.findStepIndex(step) <= this.nextStep;
     },
 
     changeToStep(step) {

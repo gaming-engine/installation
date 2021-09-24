@@ -3,7 +3,7 @@
 namespace GamingEngine\Installation\Tests\Feature\Http\Requests\Api\V1\DatabaseRequirements;
 
 use GamingEngine\Installation\Http\Requests\Api\V1\DatabaseRequirements\OverrideRequest;
-use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -18,7 +18,7 @@ class OverrideRequestTest extends TestCase
     public function override_request_automatically_nullable_items_are_not_required()
     {
         // Arrange
-        $configuration = $this->mock(ConfigurationValue::class);
+        $configuration = $this->mock(EnvironmentConfigurationValue::class);
         $configuration->shouldReceive('attribute')
             ->andReturn($attribute = $this->faker->slug);
         $configuration->shouldReceive('nullable')
@@ -52,7 +52,7 @@ class OverrideRequestTest extends TestCase
         // Arrange
         $this->fakeValidator();
 
-        $configuration = $this->mock(ConfigurationValue::class);
+        $configuration = $this->mock(EnvironmentConfigurationValue::class);
         $configuration->shouldReceive('attribute')
             ->andReturn($attribute = $this->faker->slug);
         $configuration->shouldReceive('nullable')

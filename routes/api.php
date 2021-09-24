@@ -1,5 +1,6 @@
 <?php
 
+use GamingEngine\Installation\Http\Controllers\Api\V1\AccountDetailsController;
 use GamingEngine\Installation\Http\Controllers\Api\V1\DatabaseRequirementsController;
 use GamingEngine\Installation\Http\Controllers\Api\V1\ServerRequirementsController;
 use GamingEngine\Installation\Http\Controllers\Api\V1\StepController;
@@ -17,4 +18,10 @@ Route::prefix('requirements')
 
         Route::post('database', [DatabaseRequirementsController::class, 'store'])
             ->name('database.attempt');
+
+        Route::get('account', [AccountDetailsController::class, 'index'])
+            ->name('account');
+
+        Route::post('account', [AccountDetailsController::class, 'store'])
+            ->name('account.attempt');
     });

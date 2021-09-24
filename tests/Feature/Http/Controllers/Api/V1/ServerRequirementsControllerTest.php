@@ -30,7 +30,7 @@ class ServerRequirementsControllerTest extends TestCase
         $response->assertOk();
         $this->assertCount(
             $requirements->checks()->count(),
-            $response->json('data')
+            $response->json('data.validations')
         );
         $requirements
             ->checks()
@@ -53,7 +53,7 @@ class ServerRequirementsControllerTest extends TestCase
         // Assert
         $this->assertEquals(
             RequirementResource::class,
-            $response->collects
+            $response->toArray(null)['validations']->collects
         );
     }
 }

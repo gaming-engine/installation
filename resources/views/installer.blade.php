@@ -11,9 +11,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="{{ asset('css/framework/gaming-engine.css') }}" rel="stylesheet">
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('/js/manifest.js', 'modules/installation') }}"></script>
+    <script src="{{ mix('/js/vendor.js', 'modules/installation') }}"></script>
+    <script src="{{ mix('/js/app.js', 'modules/installation') }}" defer></script>
 </head>
 <body class="font-sans antialiased text-gray-900">
 <div class="pt-4">

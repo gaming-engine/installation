@@ -2,17 +2,18 @@
 
 namespace GamingEngine\Installation\Http\Resources\Api\V1\Requirements;
 
+use GamingEngine\Installation\Requirements\Account\AccountConfigurationRequirements;
+use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
 use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
-use GamingEngine\Installation\Requirements\Database\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Requirements\Requirement;
-use GamingEngine\Installation\Steps\DatabaseRequirementsStep;
+use GamingEngine\Installation\Steps\AccountDetailsStep;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
 /**
- * @property-read DatabaseRequirementsStep $resource
+ * @property-read AccountDetailsStep $resource
  */
-class DatabaseRequirementResource extends JsonResource
+class AccountDetailsResource extends JsonResource
 {
     public function toArray($request)
     {
@@ -24,10 +25,10 @@ class DatabaseRequirementResource extends JsonResource
             'configurations' => ConfigurationResource::collection(
                 $this->configurationValues()
                     ->keyBy(
-                        fn (EnvironmentConfigurationValue $configurationValue) => $configurationValue->attribute()
+                        fn (ConfigurationValue $configurationValue) => $configurationValue->attribute()
                     )
             ),
-            'resources' => __('gaming-engine:installation::requirements.database'),
+            'resources' => __('gaming-engine:installation::requirements.account'),
         ];
     }
 
@@ -48,12 +49,12 @@ class DatabaseRequirementResource extends JsonResource
             ->components();
     }
 
-    private function configurationRequirements(): DatabaseConfigurationRequirements
+    private function configurationRequirements(): AccountConfigurationRequirements
     {
         return $this->resource
             ->checks()
             ->first(
-                fn (Requirement $requirement) => $requirement instanceof DatabaseConfigurationRequirements
+                fn (Requirement $requirement) => $requirement instanceof AccountConfigurationRequirements
             );
     }
 }

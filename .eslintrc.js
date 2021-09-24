@@ -16,9 +16,10 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    'max-len': [
+    'vue/max-len': [
       'error',
       {
+        template: 100,
         ignorePattern: 'd="([\\s\\S]*?)"',
       },
     ],

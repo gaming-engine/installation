@@ -3,7 +3,7 @@
 namespace GamingEngine\Installation\Tests\Feature\Api\V1\Requirements;
 
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\ConfigurationResource;
-use GamingEngine\Installation\Steps\ConfigurationRequirements\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 
@@ -17,7 +17,7 @@ class ConfigurationResourceTest extends TestCase
     public function configuration_requirement_contract()
     {
         // Arrange
-        $resource = $this->mock(ConfigurationValue::class);
+        $resource = $this->mock(EnvironmentConfigurationValue::class);
         $resource->shouldReceive('attribute')
             ->andReturn($attribute = $this->faker->slug);
         $resource->shouldReceive('name')
@@ -26,6 +26,8 @@ class ConfigurationResourceTest extends TestCase
             ->andReturn($description = $this->faker->slug);
         $resource->shouldReceive('value')
             ->andReturn($value = $this->faker->slug);
+        $resource->shouldReceive('nullable')
+            ->andReturn($nullable = $this->faker->boolean);
 
         $subject = new ConfigurationResource($resource);
 
@@ -34,7 +36,7 @@ class ConfigurationResourceTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            compact('attribute', 'name', 'description', 'value'),
+            compact('attribute', 'name', 'description', 'value', 'nullable'),
             $response
         );
     }

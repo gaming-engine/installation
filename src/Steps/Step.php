@@ -2,6 +2,7 @@
 
 namespace GamingEngine\Installation\Steps;
 
+use GamingEngine\Installation\Requirements\Requirement;
 use Illuminate\Support\Collection;
 
 interface Step

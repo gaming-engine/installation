@@ -10,8 +10,10 @@ use GamingEngine\Installation\Helpers\PHP\PHPDetails;
 use GamingEngine\Installation\Helpers\PHP\PHPFeatureInformation;
 use GamingEngine\Installation\Http\View\Components\WizardComponent;
 use GamingEngine\Installation\Module\InstallationModule;
+use GamingEngine\Installation\Steps\AccountDetailsStep;
 use GamingEngine\Installation\Steps\DatabaseRequirementsStep;
 use GamingEngine\Installation\Steps\ServerRequirementsStep;
+use GamingEngine\Installation\Steps\SettingsStep;
 use GamingEngine\Installation\Steps\StepCollection;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
@@ -55,6 +57,8 @@ class InstallationServiceProvider extends PackageServiceProvider
             fn () => new StepCollection([
                 new ServerRequirementsStep(),
                 app(DatabaseRequirementsStep::class),
+                new AccountDetailsStep(),
+                new SettingsStep(),
             ])
         );
     }
@@ -64,9 +68,7 @@ class InstallationServiceProvider extends PackageServiceProvider
         $environment = $this->environment();
 
         $this->publishes([
-            __DIR__ . "/../dist/$environment/public/js/" => 'public/js/installation/',
-            __DIR__ . "/../dist/$environment/public/css/" => 'public/css/installation/',
-            __DIR__ . '/../resources/images' => 'public/images/installation/',
+            __DIR__ . "/../dist/$environment/" => 'public/modules/installation/',
         ], 'gaming-engine:installation-resources');
     }
 

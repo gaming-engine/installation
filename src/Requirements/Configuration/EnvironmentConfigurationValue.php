@@ -6,22 +6,25 @@ use GamingEngine\Installation\Requirements\RequirementDetail;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 
-abstract class ConfigurationValue implements RequirementDetail
+abstract class EnvironmentConfigurationValue implements RequirementDetail
 {
     protected string $attribute;
-    protected ?string $value;
+    protected string $configurationKey;
+    protected string $environmentVariable;
     protected bool $nullable;
     private ?string $override;
 
     #[ArrayShape([
         'attribute' => 'string',
-        'value' => 'string',
+        'configurationKey' => 'string',
+        'environmentVariable' => 'string',
         'nullable' => '?boolean',
     ])]
     public function __construct(array $arguments)
     {
         $this->attribute = $arguments['attribute'];
-        $this->value = $arguments['value'] ?? null;
+        $this->configurationKey = $arguments['configurationKey'];
+        $this->environmentVariable = $arguments['environmentVariable'];
         $this->nullable = $arguments['nullable'] ?? false;
     }
 
@@ -30,7 +33,17 @@ abstract class ConfigurationValue implements RequirementDetail
         return $this->attribute;
     }
 
+    public function environmentVariable()
+    {
+        return $this->environmentVariable;
+    }
+
     abstract public function description(): string;
+
+    public function key(): string
+    {
+        return $this->configurationKey;
+    }
 
     public function check(): bool
     {
@@ -52,7 +65,7 @@ abstract class ConfigurationValue implements RequirementDetail
             return $this->override;
         }
 
-        return $this->value;
+        return config("gaming-engine-installation.$this->configurationKey");
     }
 
     public function override(?string $value)

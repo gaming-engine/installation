@@ -2,7 +2,7 @@
     <form v-if="hasConfigurations" class="w-1/2 m-auto" method="post" @submit.prevent="submit">
         <component
             :is="'drop-down'"
-            id="engine"
+            id="database.engine"
             v-model="form.engine"
             :description="configurations.engine.description"
             :disabled="disabled"
@@ -13,7 +13,7 @@
         />
         <component
             :is="'input-field'"
-            id="host"
+            id="database.host"
             v-model="form.host"
             :description="configurations.host.description"
             :disabled="disabled"
@@ -23,7 +23,7 @@
         />
         <component
             :is="'input-field'"
-            id="database-name"
+            id="database.database-name"
             v-model="form['database-name']"
             :description="configurations['database-name'].description"
             :disabled="disabled"
@@ -33,7 +33,7 @@
         />
         <component
             :is="'input-field'"
-            id="username"
+            id="database.username"
             v-model="form.username"
             :description="configurations.username.description"
             :disabled="disabled"
@@ -43,7 +43,7 @@
         />
         <component
             :is="'password-field'"
-            id="password"
+            id="database.password"
             v-model="form.password"
             :description="configurations.password.description"
             :disabled="disabled"
@@ -52,6 +52,22 @@
             autocomplete="database-password"
             class="mb-3"
         />
+
+        <div
+            v-if="!form.password"
+            class="
+            bg-blue-100
+            border-l-4
+            border-blue-500
+            text-blue-700
+            p-4
+            mb-4
+            "
+            role="alert"
+        >
+            <p class="font-bold">{{ configurations.password.name }}</p>
+            <p>{{ resources.configuration.password.warning }}</p>
+        </div>
 
         <div
             v-if="!connectivity.is_complete"
@@ -77,9 +93,9 @@
                     'hover:bg-green-300': !disabled
                 }"
                 :disabled="disabled"
+                :text="resources.button"
                 class="bg-green-500"
                 style="color: white"
-                text="Test Connection"
             />
         </div>
     </form>
@@ -87,16 +103,19 @@
 
 <script>
 import axios from 'axios';
+import InterpretResponse from '../../../mixins/interpret-response';
+import HasState from '../../../mixins/state';
 
 export default {
   name: 'database-requirements',
   data: () => ({
     validations: [],
-    collapsed: {},
     configurations: {},
     form: {},
-    state: 'idle',
+    resources: {},
   }),
+
+  mixins: [InterpretResponse, HasState],
 
   computed: {
     databaseOptions() {
@@ -111,9 +130,11 @@ export default {
         },
       ];
     },
+
     disabled() {
       return this.state !== 'idle';
     },
+
     connectivity() {
       return this.validations.connectivity;
     },
@@ -124,24 +145,16 @@ export default {
   },
 
   async created() {
-    await this.refresh();
+    const { data } = (
+      await axios.get('/api/v1/installation/requirements/database')
+    ).data;
+
+    this.processResponse(data);
   },
 
   methods: {
-    setState(state) {
-      this.state = state;
-    },
-
-    async refresh() {
-      const { data } = (
-        await axios.get('/api/v1/installation/requirements/database')
-      ).data;
-
-      this.processResponse(data);
-    },
-
     async submit() {
-      if (this.state !== 'idle') {
+      if (this.disabled) {
         return;
       }
 
@@ -162,23 +175,11 @@ export default {
 
       this.setState('idle');
     },
+  },
 
-    processResponse(data) {
-      const { configurations, validations } = data || {};
-
-      if (!configurations || !validations) {
-        throw Error('Invalid response');
-      }
-
-      this.configurations = configurations;
-      this.validations = validations;
-
-      Object.entries(configurations)
-        .forEach(([key, value]) => {
-          this.form[key] = value.value;
-        });
-
-      this.$emit('completed', this.connectivity?.is_complete);
+  watch: {
+    connectivity(connectivity) {
+      this.$emit('completed', connectivity?.is_complete);
     },
   },
 };
