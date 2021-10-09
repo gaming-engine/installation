@@ -22,9 +22,7 @@ class ServerRequirementsControllerTest extends TestCase
         $requirements = app(ServerRequirementsStep::class);
 
         // Act
-        $response = $this->getJson(
-            '/api/v1/installation/requirements/server'
-        );
+        $response = $this->getJson('/api/v1/installation/server/requirements');
 
         // Assert
         $response->assertOk();

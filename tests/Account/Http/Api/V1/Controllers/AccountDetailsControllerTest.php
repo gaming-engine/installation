@@ -59,9 +59,7 @@ class AccountDetailsControllerTest extends TestCase
         $requirements = app(AccountDetailsStep::class);
 
         // Act
-        $response = $this->getJson(
-            '/api/v1/installation/requirements/account'
-        );
+        $response = $this->getJson('/api/v1/installation/account/requirements');
 
         // Assert
         $response->assertOk();
@@ -120,10 +118,7 @@ class AccountDetailsControllerTest extends TestCase
             ->toArray();
 
         // Act
-        $response = $this->postJson(
-            '/api/v1/installation/requirements/account',
-            $values
-        );
+        $response = $this->postJson('/api/v1/installation/account/requirements', $values);
 
         // Assert
         $response->assertOk();

@@ -5,7 +5,7 @@ namespace GamingEngine\Installation\Tests\Api\V1\Requirements;
 use GamingEngine\Installation\Database\Http\Api\V1\Resources\DatabaseRequirementResource;
 use GamingEngine\Installation\Database\Requirements\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Database\Steps\DatabaseRequirementsStep;
-use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\ConfigurationResource;
+use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\EnvironmentConfigurationResource;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\RequirementResource;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -54,6 +54,6 @@ class DatabaseRequirementsResourceTest extends TestCase
         $this->assertEquals(RequirementResource::class, $response['validations']->collects);
 
         $this->assertInstanceOf(AnonymousResourceCollection::class, $response['configurations']);
-        $this->assertEquals(ConfigurationResource::class, $response['configurations']->collects);
+        $this->assertEquals(EnvironmentConfigurationResource::class, $response['configurations']->collects);
     }
 }

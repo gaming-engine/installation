@@ -13,8 +13,9 @@ use GamingEngine\Installation\Helpers\PHP\PHPFeatureInformation;
 use GamingEngine\Installation\Http\View\Components\WizardComponent;
 use GamingEngine\Installation\Module\InstallationModule;
 use GamingEngine\Installation\Server\Steps\ServerRequirementsStep;
-use GamingEngine\Installation\Steps\SettingsStep;
+use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
 use GamingEngine\Installation\Steps\StepCollection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -55,10 +56,10 @@ class InstallationServiceProvider extends PackageServiceProvider
         $this->app->singleton(
             StepCollection::class,
             fn () => new StepCollection([
+                app(LanguageSettingsStep::class),
                 new ServerRequirementsStep(),
                 app(DatabaseRequirementsStep::class),
                 new AccountDetailsStep(),
-                new SettingsStep(),
             ])
         );
     }
@@ -93,5 +94,15 @@ class InstallationServiceProvider extends PackageServiceProvider
         $core = app(Core::class);
 
         $core->registerPackage(app(InstallationModule::class));
+        $this->setLanguage();
+    }
+
+    private function setLanguage(): void
+    {
+        /**
+         * @var LanguageSettingsStep $language
+         */
+        $language = app(LanguageSettingsStep::class);
+        App::setLocale($language->locale());
     }
 }

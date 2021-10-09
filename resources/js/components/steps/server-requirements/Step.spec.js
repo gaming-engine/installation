@@ -21,7 +21,7 @@ describe('server requirements step', () => {
       shallowMount(Step);
 
       expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/requirements/server',
+        '/api/v1/installation/server/requirements',
       );
     });
   });
@@ -43,7 +43,7 @@ describe('server requirements step', () => {
       await vm.refresh();
 
       expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/requirements/server',
+        '/api/v1/installation/server/requirements',
       );
     });
 

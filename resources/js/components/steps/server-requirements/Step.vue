@@ -34,7 +34,7 @@
             </li>
         </ul>
 
-        <div class="text-center">
+        <div class="text-center mt-4">
             <button
                 class="
                     inline-flex
@@ -64,6 +64,10 @@ export default {
     collapsed: {},
   }),
 
+  computed: {
+    url: () => '/api/v1/installation/server/requirements',
+  },
+
   async created() {
     await this.refresh();
   },
@@ -71,7 +75,7 @@ export default {
   methods: {
     async refresh() {
       const { data } = (
-        await axios.get('/api/v1/installation/requirements/server')
+        await axios.get(this.url)
       ).data;
 
       const { validations, resources } = data;

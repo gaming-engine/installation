@@ -76,12 +76,33 @@ return [
         ],
     ],
     "settings" => [
+        "date" => [
+            "date-format" => [
+                "description" => "How would you like the dates in the application to be displayed?",
+                "name" => "Date Format",
+            ],
+            "description" => "Define how the game will deal with the displaying of dates.",
+            "name" => "Date Settings",
+            "time-format" => [
+                "description" => "How would you like the times in the application to be displayed?",
+                "name" => "Time Format",
+            ],
+            "timezone" => [
+                "description" => "What timezone would you like the application to run in?",
+                "name" => "Timezone",
+            ],
+        ],
         "description" => "Customize your site",
         "language" => [
+            "button" => "Select Language",
             "description" => "What would you like the primary language for your site to be in?",
             "en" => ["name" => "English"],
             "es" => ["name" => "Spanish"],
             "fr" => ["name" => "French"],
+            "locale" => [
+                "description" => "Please Note: Not all plugins may be implemented in the specified language.  If they are not, it will default to English.",
+                "name" => "Select a Language",
+            ],
             "name" => "Language",
         ],
         "name" => "Settings",

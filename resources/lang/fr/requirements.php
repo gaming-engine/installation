@@ -1,13 +1,22 @@
 <?php
 return [
     "account" => [
-        "button" => "",
+        "button" => "sauvegarder",
         "configuration" => [
             "description" => "Configurez les détails du compte par défaut.",
-            "email" => ["description" => "", "name" => ""],
+            "email" => [
+                "description" => "Quelle est l'adresse électronique du compte administrateur par défaut ?",
+                "name" => "Adresse électronique",
+            ],
             "name" => "Details du compte",
-            "password" => ["description" => "", "name" => ""],
-            "username" => ["description" => "", "name" => ""],
+            "password" => [
+                "description" => "Quel est le mot de passe du compte administrateur par défaut ?",
+                "name" => "Mot de passe",
+            ],
+            "username" => [
+                "description" => "Quel est le nom d'utilisateur du compte administrateur par défaut ?",
+                "name" => "Nom d'utilisateur",
+            ],
         ],
     ],
     "database" => [
@@ -73,12 +82,33 @@ return [
         ],
     ],
     "settings" => [
+        "date" => [
+            "date-format" => [
+                "description" => "Comment voulez-vous que les dates soient affichées dans l'application ?",
+                "name" => "Format de la date",
+            ],
+            "description" => "Définissez comment le jeu va gérer l'affichage des dates.",
+            "name" => "Paramètres de la date",
+            "time-format" => [
+                "description" => "Comment voulez-vous que les heures de l'application soient affichées ?",
+                "name" => "Format de l'heure",
+            ],
+            "timezone" => [
+                "description" => "Dans quel fuseau horaire souhaitez-vous que l'application fonctionne ?",
+                "name" => "Fuseau horaire",
+            ],
+        ],
         "description" => "Personnalisez votre site",
         "language" => [
+            "button" => "Sélectionnez une langue",
             "description" => "Dans quelle langue souhaitez-vous que la langue principale de votre site soit utilisée ?",
             "en" => ["name" => "Anglais"],
             "es" => ["name" => "Espagnol"],
             "fr" => ["name" => "français"],
+            "locale" => [
+                "description" => "Veuillez noter : tous les plugins peuvent ne pas être implémentés dans la langue spécifiée. S'ils ne le sont pas, l'anglais sera par défaut.",
+                "name" => "Sélectionnez une langue",
+            ],
             "name" => "Langue",
         ],
         "name" => "Paramètres",

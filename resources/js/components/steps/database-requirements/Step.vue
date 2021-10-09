@@ -108,6 +108,7 @@ import HasState from '../../../mixins/state';
 
 export default {
   name: 'database-requirements',
+
   data: () => ({
     validations: [],
     configurations: {},
@@ -132,7 +133,7 @@ export default {
     },
 
     disabled() {
-      return this.state !== 'idle';
+      return 'idle' !== this.state;
     },
 
     connectivity() {
@@ -140,13 +141,15 @@ export default {
     },
 
     hasConfigurations() {
-      return Object.keys(this.configurations).length > 0;
+      return 0 < Object.keys(this.configurations).length;
     },
+
+    url: () => '/api/v1/installation/database/requirements',
   },
 
   async created() {
     const { data } = (
-      await axios.get('/api/v1/installation/requirements/database')
+      await axios.get(this.url)
     ).data;
 
     this.processResponse(data);
@@ -162,10 +165,7 @@ export default {
 
       try {
         const { data } = (
-          await axios.post(
-            '/api/v1/installation/requirements/database',
-            this.form,
-          )
+          await axios.post(this.url, this.form)
         ).data;
 
         this.processResponse(data);

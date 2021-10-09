@@ -61,7 +61,7 @@ describe('database requirements step', () => {
       shallowMount(Step);
 
       expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/requirements/database',
+        '/api/v1/installation/database/requirements',
       );
     });
   });
@@ -126,7 +126,7 @@ describe('database requirements step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/requirements/database',
+          '/api/v1/installation/database/requirements',
         );
       });
 
@@ -148,7 +148,7 @@ describe('database requirements step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/requirements/database',
+          '/api/v1/installation/database/requirements',
         );
       });
     });

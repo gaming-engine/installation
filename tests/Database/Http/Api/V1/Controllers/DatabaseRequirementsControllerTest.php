@@ -60,9 +60,7 @@ class DatabaseRequirementsControllerTest extends TestCase
         $requirements = app(DatabaseRequirementsStep::class);
 
         // Act
-        $response = $this->getJson(
-            '/api/v1/installation/requirements/database'
-        );
+        $response = $this->getJson('/api/v1/installation/database/requirements');
 
         // Assert
         $response->assertOk();
@@ -134,10 +132,7 @@ class DatabaseRequirementsControllerTest extends TestCase
             ->andReturnTrue();
 
         // Act
-        $response = $this->postJson(
-            '/api/v1/installation/requirements/database',
-            $values
-        );
+        $response = $this->postJson('/api/v1/installation/database/requirements', $values);
 
         // Assert
         $response->assertOk();

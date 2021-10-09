@@ -1,13 +1,22 @@
 <?php
 return [
     "account" => [
-        "button" => "",
+        "button" => "Guardar",
         "configuration" => [
             "description" => "Configurar los datos de la cuenta por defecto.",
-            "email" => ["description" => "", "name" => ""],
+            "email" => [
+                "description" => "¿Cuál es la dirección de correo electrónico de la cuenta de administrador por defecto?",
+                "name" => "Dirección de correo electrónico",
+            ],
             "name" => "Detalles de la cuenta",
-            "password" => ["description" => "", "name" => ""],
-            "username" => ["description" => "", "name" => ""],
+            "password" => [
+                "description" => "¿Cuál es la contraseña de la cuenta de administrador por defecto?",
+                "name" => "Contraseña",
+            ],
+            "username" => [
+                "description" => "¿Cuál es el nombre de usuario de la cuenta de administrador por defecto?",
+                "name" => "Nombre de usuario",
+            ],
         ],
     ],
     "database" => [
@@ -73,12 +82,33 @@ return [
         ],
     ],
     "settings" => [
+        "date" => [
+            "date-format" => [
+                "description" => "¿Cómo quiere que se muestren las fechas en la aplicación?",
+                "name" => "Formato de la fecha",
+            ],
+            "description" => "Definir cómo el juego tratará la visualización de las fechas.",
+            "name" => "Configuración de la fecha",
+            "time-format" => [
+                "description" => "¿Cómo quiere que se muestren los tiempos en la aplicación?",
+                "name" => "Formato de Tiempo",
+            ],
+            "timezone" => [
+                "description" => "¿En qué zona horaria desea que se ejecute la aplicación?",
+                "name" => "Zona horaria",
+            ],
+        ],
         "description" => "Personalice su sitio web",
         "language" => [
+            "button" => "Seleccione el idioma",
             "description" => "¿En qué idioma le gustaría que estuviera la página web?",
             "en" => ["name" => "Inglés"],
             "es" => ["name" => "español"],
             "fr" => ["name" => "francés"],
+            "locale" => [
+                "description" => "Nota: es posible que no todos los complementos se implementen en el idioma especificado. Si no es así, se utilizará de forma predeterminada en inglés.",
+                "name" => "Seleccione un idioma",
+            ],
             "name" => "idioma",
         ],
         "name" => "Ajustes",

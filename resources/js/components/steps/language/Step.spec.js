@@ -4,33 +4,39 @@ import Step from './Step.vue';
 
 jest.mock('axios');
 
-describe('account settings step', () => {
+describe('language step', () => {
   const sampleConfigurations = {
-    email: {
-      name: 'foo',
-      description: 'foo',
-      value: 'bar',
-      nullable: false,
-    },
-    username: {
+    locale: {
       name: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
-    },
-    password: {
-      name: 'foo',
-      description: 'foo',
-      value: 'foobar',
-      nullable: false,
+      available: [
+        'hi',
+        'bye',
+        'foo',
+      ],
     },
   };
 
-  const sampleValidations = {
-    configurations: {
-      is_complete: true,
+  const resources = {
+    button: 'hello',
+    locale: {
+      name: 'locale-name',
+      description: 'locale-description',
+    },
+    hi: {
+      name: 'HELLO',
+    },
+    bye: {
+      name: 'BYE',
+    },
+    foo: {
+      name: 'FOO',
     },
   };
+
+  const sampleValidations = {};
 
   describe('created', () => {
     it('automatically retrieves the current status', () => {
@@ -39,6 +45,7 @@ describe('account settings step', () => {
           data: {
             validations: [],
             configurations: {},
+            resources,
           },
         },
       });
@@ -46,12 +53,37 @@ describe('account settings step', () => {
       shallowMount(Step);
 
       expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/account/requirements',
+        '/api/v1/installation/language/requirements',
       );
     });
   });
 
   describe('computed', () => {
+    describe('language selections', () => {
+      it('defaults the values', () => {
+        const { vm } = shallowMount(Step);
+
+        vm.configurations = sampleConfigurations;
+        vm.resources = resources;
+
+        expect(vm.languageSelections)
+          .toEqual([
+            {
+              value: 'hi',
+              text: 'HELLO',
+            },
+            {
+              value: 'bye',
+              text: 'BYE',
+            },
+            {
+              value: 'foo',
+              text: 'FOO',
+            },
+          ]);
+      });
+    });
+
     describe('disabled', () => {
       it('is true if the state is not idle', () => {
         const { vm } = shallowMount(Step);
@@ -93,7 +125,7 @@ describe('account settings step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/account/requirements',
+          '/api/v1/installation/language/requirements',
         );
       });
 
@@ -103,7 +135,7 @@ describe('account settings step', () => {
             data: {
               validations: [],
               configurations: {},
-              resources: {},
+              resources,
             },
           },
         });
@@ -113,7 +145,7 @@ describe('account settings step', () => {
         vm.submit();
 
         expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/account/requirements',
+          '/api/v1/installation/language/requirements',
         );
       });
     });
@@ -151,16 +183,12 @@ describe('account settings step', () => {
         vm.processResponse({
           configurations: sampleConfigurations,
           validations: sampleValidations,
-          resources: {
-            button: 'testing',
-          },
+          resources,
         });
 
         expect(vm.form)
           .toEqual({
-            username: 'foo',
-            email: 'bar',
-            password: 'foobar',
+            locale: 'foo',
           });
       });
     });

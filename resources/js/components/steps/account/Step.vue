@@ -68,22 +68,23 @@ export default {
 
   computed: {
     canSubmit() {
-      return Object.keys(this.configurations)
+      return 0 === Object.keys(this.configurations)
         .filter((key) => !this.configurations[key].nullable)
         .filter((key) => !this.form[key])
-        .length === 0;
+        .length;
     },
     disabled() {
-      return this.state !== 'idle';
+      return 'idle' !== this.state;
     },
     hasConfigurations() {
-      return Object.keys(this.configurations).length > 0;
+      return 0 < Object.keys(this.configurations).length;
     },
+    url: () => '/api/v1/installation/account/requirements',
   },
 
   async created() {
     const { data } = (
-      await axios.get('/api/v1/installation/requirements/account')
+      await axios.get(this.url)
     ).data;
 
     this.processResponse(data);
@@ -99,10 +100,7 @@ export default {
 
       try {
         const { data } = (
-          await axios.post(
-            '/api/v1/installation/requirements/account',
-            this.form,
-          )
+          await axios.post(this.url, this.form)
         ).data;
 
         this.processResponse(data);

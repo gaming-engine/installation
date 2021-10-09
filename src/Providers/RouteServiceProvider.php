@@ -11,7 +11,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->routes(function () {
             Route::prefix('api/v1/installation')
-                ->name('api.v1.installation')
+                ->name('api.v1.installation.')
                 ->group(__DIR__ . '/../../routes/api.php');
 
             Route::middleware('web')
