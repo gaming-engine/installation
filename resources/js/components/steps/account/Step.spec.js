@@ -12,7 +12,7 @@ describe('account settings step', () => {
       value: 'bar',
       nullable: false,
     },
-    username: {
+    name: {
       name: 'foo',
       description: 'foo',
       value: 'foo',
@@ -45,9 +45,10 @@ describe('account settings step', () => {
 
       shallowMount(Step);
 
-      expect(axios.get).toHaveBeenCalledWith(
-        '/api/v1/installation/account/requirements',
-      );
+      expect(axios.get)
+        .toHaveBeenCalledWith(
+          '/api/v1/installation/account/requirements',
+        );
     });
   });
 
@@ -92,9 +93,11 @@ describe('account settings step', () => {
         vm.setState('bar');
         vm.submit();
 
-        expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/account/requirements',
-        );
+        expect(axios.post)
+          .not
+          .toHaveBeenCalledWith(
+            '/api/v1/installation/account/requirements',
+          );
       });
 
       it('fires a request if the state is idle', () => {
@@ -112,9 +115,11 @@ describe('account settings step', () => {
 
         vm.submit();
 
-        expect(axios.post).not.toHaveBeenCalledWith(
-          '/api/v1/installation/account/requirements',
-        );
+        expect(axios.post)
+          .not
+          .toHaveBeenCalledWith(
+            '/api/v1/installation/account/requirements',
+          );
       });
     });
 
@@ -158,7 +163,7 @@ describe('account settings step', () => {
 
         expect(vm.form)
           .toEqual({
-            username: 'foo',
+            name: 'foo',
             email: 'bar',
             password: 'foobar',
           });

@@ -14,12 +14,12 @@ class FolderRequirements extends BaseServerRequirement
 
     public function name(): string
     {
-        return __('gaming-engine:installation::requirements.server.folder.name');
+        return (string)__('gaming-engine:installation::requirements.server.folder.title');
     }
 
     public function description(): string
     {
-        return __('gaming-engine:installation::requirements.server.folder.description');
+        return (string)__('gaming-engine:installation::requirements.server.folder.description');
     }
 
     public function checks(): array
@@ -33,12 +33,22 @@ class FolderRequirements extends BaseServerRequirement
                 __('gaming-engine:installation::requirements.server.folder.paths.public-storage'),
                 storage_path('app/public')
             ),
+
             new FolderExistenceRequirement(
                 __('gaming-engine:installation::requirements.server.folder.paths.storage-link'),
                 public_path('storage')
             ),
             new WritableFolderRequirement(
                 __('gaming-engine:installation::requirements.server.folder.paths.storage-link'),
+                public_path('storage')
+            ),
+
+            new FolderExistenceRequirement(
+                __('gaming-engine:installation::requirements.server.folder.paths.migrations'),
+                public_path('storage')
+            ),
+            new WritableFolderRequirement(
+                __('gaming-engine:installation::requirements.server.folder.paths.migrations'),
                 public_path('storage')
             ),
         ];

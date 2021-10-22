@@ -9,8 +9,8 @@ class PHPRequirements extends BaseServerRequirement
 {
     public function name(): string
     {
-        return __(
-            'gaming-engine:installation::requirements.server.php.name',
+        return (string)__(
+            'gaming-engine:installation::requirements.server.php.title',
             [
                 'version' => phpversion(),
             ]
@@ -24,7 +24,7 @@ class PHPRequirements extends BaseServerRequirement
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.php.description',
             [
                 'version' => phpversion(),

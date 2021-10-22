@@ -88,6 +88,7 @@
 
                 <component
                     :is="`${step.identifier}-step`"
+                    :steps="steps"
                     @completed="updateStatus(step, $event)"
                 ></component>
             </div>
@@ -154,10 +155,12 @@ export default {
   data: () => ({
     current: {},
     statuses: {},
+    state: 'idle',
   }),
 
   created() {
     [this.current] = this.steps;
+    this.setState('configuring');
 
     this.steps.forEach((step) => {
       this.statuses[step.identifier] = step.is_complete;
@@ -166,14 +169,14 @@ export default {
 
   computed: {
     stepWidth() {
-      if (this.steps.length < 4) {
+      if (4 > this.steps.length) {
         return 3;
       }
       return Math.floor(12 / this.steps.length);
     },
 
     hasPreviousStep() {
-      return this.currentIndex !== 0;
+      return 0 !== this.currentIndex;
     },
 
     hasNextStep() {
@@ -194,6 +197,14 @@ export default {
   },
 
   methods: {
+    setState(state) {
+      if ('installing' === state && -1 !== this.nextStep) {
+        return;
+      }
+
+      this.state = state;
+    },
+
     changeToNextStep() {
       if (!this.canGoToNextStep) {
         return;
@@ -215,7 +226,7 @@ export default {
     },
 
     updateStatus(step, value) {
-      if (typeof value !== 'boolean') {
+      if ('boolean' !== typeof value) {
         return;
       }
 
@@ -233,6 +244,7 @@ export default {
     },
 
     changeToStep(step) {
+      this.setState('configuring');
       if (this.isStepComplete(step)) {
         this.current = step;
         return;
@@ -243,6 +255,10 @@ export default {
       if (this.findStepIndex(step) <= nextStep) {
         this.current = step;
       }
+    },
+
+    install() {
+      this.setState('installing');
     },
   },
 };

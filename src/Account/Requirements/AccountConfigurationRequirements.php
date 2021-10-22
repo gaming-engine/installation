@@ -22,7 +22,7 @@ class AccountConfigurationRequirements implements Requirement
 
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.account.configuration.name");
+        return __("gaming-engine:installation::requirements.account.configuration.title");
     }
 
     public function description(): string
@@ -44,7 +44,7 @@ class AccountConfigurationRequirements implements Requirement
                 'value' => 'admin@admin.com',
             ]),
             new AccountConfigurationValue([
-                'attribute' => 'username',
+                'attribute' => 'name',
                 'value' => 'Admin',
             ]),
             new AccountConfigurationValue([

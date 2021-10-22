@@ -2,6 +2,7 @@
 
 namespace GamingEngine\Installation\Tests;
 
+use GamingEngine\Core\Account\Providers\UserServiceProvider;
 use GamingEngine\Core\CoreServiceProvider;
 use GamingEngine\Installation\InstallationServiceProvider;
 use GamingEngine\Installation\Providers\RouteServiceProvider;
@@ -40,6 +41,7 @@ class TestCase extends Orchestra
     {
         return [
             CoreServiceProvider::class,
+            UserServiceProvider::class,
             InstallationServiceProvider::class,
             RouteServiceProvider::class,
         ];

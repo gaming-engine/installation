@@ -26,7 +26,7 @@ class ConnectsToDatabaseRequirement extends BaseRequirement implements Requireme
 
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.database.connection.name");
+        return __("gaming-engine:installation::requirements.database.connection.title");
     }
 
     public function description(): string

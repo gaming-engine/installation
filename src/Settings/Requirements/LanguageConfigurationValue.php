@@ -2,20 +2,20 @@
 
 namespace GamingEngine\Installation\Settings\Requirements;
 
-use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
+use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class LanguageConfigurationValue extends ConfigurationValue
+class LanguageConfigurationValue extends EnvironmentConfigurationValue
 {
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.settings.language.{$this->attribute}.name");
+        return (string)__("gaming-engine:installation::requirements.settings.language.{$this->attribute}.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.settings.language.{$this->attribute}.description");
+        return (string)__("gaming-engine:installation::requirements.settings.language.{$this->attribute}.description");
     }
 
     public function available(): array

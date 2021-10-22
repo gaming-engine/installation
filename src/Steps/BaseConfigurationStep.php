@@ -30,6 +30,9 @@ abstract class BaseConfigurationStep extends BaseStep implements ConfigurationSt
         return 'installation/' . md5(static::class);
     }
 
+    /**
+     * @return void
+     */
     public function override(array $overrides)
     {
         $this->overrides = $overrides;

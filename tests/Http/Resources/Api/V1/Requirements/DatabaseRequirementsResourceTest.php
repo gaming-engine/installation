@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Tests\Api\V1\Requirements;
 
-use GamingEngine\Installation\Database\Http\Api\V1\Resources\DatabaseRequirementResource;
+use GamingEngine\Installation\Database\Http\Resources\Api\V1\DatabaseRequirementResource;
 use GamingEngine\Installation\Database\Requirements\DatabaseConfigurationRequirements;
 use GamingEngine\Installation\Database\Steps\DatabaseRequirementsStep;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\EnvironmentConfigurationResource;

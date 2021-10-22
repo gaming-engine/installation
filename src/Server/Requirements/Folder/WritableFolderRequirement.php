@@ -18,7 +18,7 @@ class WritableFolderRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.folder.writable.message',
             [
                 'name' => $this->pathName,

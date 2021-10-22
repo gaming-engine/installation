@@ -1,11 +1,11 @@
 <template>
-    <form v-if="hasConfigurations" class="w-1/2 m-auto" method="post" @submit.prevent="submit">
+    <form v-if="hasConfigurations" class="md:w-1/2 m-auto" method="post" @submit.prevent="submit">
         <component
             :is="'drop-down'"
             id="language"
             v-model="form.locale"
             :disabled="disabled"
-            :label="resources.locale.name"
+            :label="resources.locale.title"
             :options="languageSelections"
         />
 

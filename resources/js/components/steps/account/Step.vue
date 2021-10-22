@@ -1,5 +1,5 @@
 <template>
-    <form v-if="hasConfigurations" class="w-1/2 m-auto" method="post" @submit.prevent="submit">
+    <form v-if="hasConfigurations" class="md:w-1/2 m-auto" method="post" @submit.prevent="submit">
         <component
             :is="'input-field'"
             id="account.email"
@@ -13,12 +13,12 @@
 
         <component
             :is="'input-field'"
-            id="account.username"
-            v-model="form.username"
-            :description="configurations.username.description"
+            id="account.name"
+            v-model="form.name"
+            :description="configurations.name.description"
             :disabled="disabled"
-            :label="configurations.username.name"
-            :required="!configurations.username.nullable"
+            :label="configurations.name.name"
+            :required="!configurations.name.nullable"
             class="mb-3"
         />
 

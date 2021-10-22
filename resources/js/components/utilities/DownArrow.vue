@@ -11,7 +11,3 @@ export default {
   name: 'down-arrow',
 };
 </script>
-
-<style scoped>
-
-</style>

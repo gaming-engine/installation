@@ -8,17 +8,18 @@ use GamingEngine\Installation\Server\Requirements\FolderRequirements;
 use GamingEngine\Installation\Server\Requirements\PHPRequirements;
 use GamingEngine\Installation\Steps\BaseStep;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 
 class ServerRequirementsStep extends BaseStep
 {
     public function identifier(): string
     {
-        return 'server-requirements';
+        return 'server';
     }
 
     public function name(): string
     {
-        return __('gaming-engine:installation::requirements.server.name');
+        return (string)__('gaming-engine:installation::requirements.server.title');
     }
 
     /**
@@ -30,6 +31,17 @@ class ServerRequirementsStep extends BaseStep
             new PHPRequirements(),
             new FolderRequirements(),
             new FileRequirements(),
+        ]);
+    }
+
+    public function apply(): void
+    {
+        Artisan::call('storage:link', [
+            '--force' => true,
+        ]);
+
+        Artisan::call('vendor:publish', [
+            '--tag' => 'gaming-engine:core-resources',
         ]);
     }
 }

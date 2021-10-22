@@ -18,7 +18,7 @@ class FileExistenceRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.file.existence.message',
             [
                 'name' => $this->pathName,

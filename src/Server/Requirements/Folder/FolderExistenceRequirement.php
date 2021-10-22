@@ -18,7 +18,7 @@ class FolderExistenceRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.folder.existence.message',
             [
                 'name' => $this->pathName,

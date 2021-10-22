@@ -6,6 +6,7 @@ use GamingEngine\Installation\Http\Resources\Api\V1\Steps\StepResource;
 use GamingEngine\Installation\Steps\Step;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\URL;
 
 class StepResourceTest extends TestCase
 {
@@ -19,6 +20,8 @@ class StepResourceTest extends TestCase
         // Arrange
         $resource = $this->mock(Step::class);
         $subject = new StepResource($resource);
+
+        URL::spy();
 
         $resource->shouldReceive('identifier')
             ->andReturn($identifier = $this->faker->slug);

@@ -25,7 +25,7 @@ class DatabaseConfigurationRequirementsTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.database.configuration.name"),
+            __("gaming-engine:installation::requirements.database.configuration.title"),
             $name
         );
     }

@@ -11,7 +11,7 @@ class PHPVersionRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.php.version.message',
             [
                 'version' => self::MINIMUM_VERSION,

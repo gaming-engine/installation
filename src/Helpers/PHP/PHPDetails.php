@@ -11,6 +11,6 @@ class PHPDetails implements PHPFeatureInformation
 
     public function hasExtension(string $extension): bool
     {
-        return phpversion(strtolower($extension));
+        return phpversion(strtolower($extension)) !== false;
     }
 }

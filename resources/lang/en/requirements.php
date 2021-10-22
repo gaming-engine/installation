@@ -6,49 +6,55 @@ return [
             "description" => "Set up the default account details.",
             "email" => [
                 "description" => "What is the email address for the default administrator account?",
-                "name" => "Email Address",
+                "title" => "Email Address",
             ],
-            "name" => "Account Details",
+            "name" => [
+                "description" => "What is the username for the default administrator account?",
+                "title" => "Username",
+            ],
             "password" => [
                 "description" => "What is the password for the default administrator account?",
-                "name" => "Password",
+                "title" => "Password",
             ],
-            "username" => [
-                "description" => "What is the username for the default administrator account?",
-                "name" => "Username",
-            ],
+            "title" => "Account Details",
         ],
     ],
     "database" => [
         "button" => "Test Connection",
         "configuration" => [
-            "database-name" => ["description" => "The name of your database", "name" => "Database Name"],
+            "database-name" => ["description" => "The name of your database", "title" => "Database Name"],
             "description" => "Settings for your database connection.",
             "engine" => [
                 "description" => "The database engine that you are using (normally mysql).",
-                "name" => "Database Engine",
+                "title" => "Database Engine",
             ],
             "host" => [
                 "description" => "The hostname that you use to connect to your database (normally localhost).",
-                "name" => "Database Host",
+                "title" => "Database Host",
             ],
-            "name" => "Database Settings",
             "password" => [
                 "description" => "The password used to connect to the database.",
-                "name" => "Database Password",
+                "title" => "Database Password",
                 "warning" => "Although not mandatory, it is strongly suggested that you have a password for your database account.",
             ],
+            "title" => "Database Settings",
             "username" => [
                 "description" => "The username used to connect to the database.",
-                "name" => "Database Username",
+                "title" => "Database Username",
             ],
         ],
         "connection" => [
             "description" => "Unable to connect to the database with the specified credentials.",
-            "name" => "Database Connectivity",
+            "title" => "Database Connectivity",
         ],
         "description" => "In order to run the site, a database is required to store all of the information.",
-        "name" => "Database Requirements",
+        "title" => "Database Requirements",
+    ],
+    "finalize" => [
+        "button" => "Install",
+        "complete" => "Congratulations! The installation process is now complete!  Click the button below to check it out.",
+        "finish" => "Take me to the Game!",
+        "title" => "Finalize Installation",
     ],
     "server" => [
         "button" => "Refresh",
@@ -56,41 +62,45 @@ return [
         "file" => [
             "description" => "Describes all of the files (and their related permissions) required to run the application.",
             "existence" => ["message" => ":name file must exist (:path)."],
-            "name" => "File Requirements",
             "paths" => ["environment" => "Environment"],
+            "title" => "File Requirements",
             "writable" => ["message" => ":name file must be writable (:path)."],
         ],
         "folder" => [
             "description" => "Describes all of the required folders for the application to run successfully.",
             "existence" => ["message" => ":name folder must exist (:path)."],
-            "name" => "Folder Requirements",
-            "paths" => ["public-storage" => "Public Storage", "storage-link" => "Web Accessible Storage"],
+            "paths" => [
+                "migrations" => "Database Migrations",
+                "public-storage" => "Public Storage",
+                "storage-link" => "Web Accessible Storage",
+            ],
+            "title" => "Folder Requirements",
             "writable" => ["message" => ":name folder must be writable (:path)."],
         ],
-        "name" => "Server Requirements",
         "php" => [
             "description" => "Checks for the PHP requirements for the application.",
             "extension" => ["message" => "PHP extension \":extension\" must be installed."],
-            "name" => "PHP Requirements (current version: :version)",
+            "title" => "PHP Requirements (current version: :version)",
             "version" => ["message" => "PHP version must be :version or higher."],
         ],
+        "title" => "Server Requirements",
     ],
     "settings" => [
         "date" => [
             "date-format" => [
                 "description" => "How would you like the dates in the application to be displayed?",
-                "name" => "Date Format",
+                "title" => "Date Format",
             ],
             "description" => "Define how the game will deal with the displaying of dates.",
-            "name" => "Date Settings",
             "time-format" => [
                 "description" => "How would you like the times in the application to be displayed?",
-                "name" => "Time Format",
+                "title" => "Time Format",
             ],
             "timezone" => [
                 "description" => "What timezone would you like the application to run in?",
-                "name" => "Timezone",
+                "title" => "Timezone",
             ],
+            "title" => "Date Settings",
         ],
         "description" => "Customize your site",
         "language" => [
@@ -101,10 +111,10 @@ return [
             "fr" => ["name" => "French"],
             "locale" => [
                 "description" => "Please Note: Not all plugins may be implemented in the specified language.  If they are not, it will default to English.",
-                "name" => "Select a Language",
+                "title" => "Select a Language",
             ],
-            "name" => "Language",
+            "title" => "Language",
         ],
-        "name" => "Settings",
+        "title" => "Settings",
     ],
 ];

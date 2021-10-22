@@ -11,11 +11,15 @@ use GamingEngine\Installation\Database\Steps\DatabaseRequirementsStep;
 use GamingEngine\Installation\Helpers\PHP\PHPDetails;
 use GamingEngine\Installation\Helpers\PHP\PHPFeatureInformation;
 use GamingEngine\Installation\Http\View\Components\WizardComponent;
+use GamingEngine\Installation\Install\ConfigurationUpdater;
+use GamingEngine\Installation\Install\Steps\FinalizeStep;
+use GamingEngine\Installation\Install\UpdatesConfiguration;
 use GamingEngine\Installation\Module\InstallationModule;
 use GamingEngine\Installation\Server\Steps\ServerRequirementsStep;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
 use GamingEngine\Installation\Steps\StepCollection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -36,6 +40,11 @@ class InstallationServiceProvider extends PackageServiceProvider
             fn () => app(DatabaseConnection::class)
         );
 
+        $this->app->singleton(
+            UpdatesConfiguration::class,
+            ConfigurationUpdater::class
+        );
+
         $package
             ->name('gaming-engine:installation')
             ->hasConfigFile('gaming-engine-installation')
@@ -51,16 +60,19 @@ class InstallationServiceProvider extends PackageServiceProvider
         $this->publishLanguages();
     }
 
-    private function loadInstallationSteps()
+    private function loadInstallationSteps(): void
     {
         $this->app->singleton(
             StepCollection::class,
-            fn () => new StepCollection([
-                app(LanguageSettingsStep::class),
-                new ServerRequirementsStep(),
-                app(DatabaseRequirementsStep::class),
-                new AccountDetailsStep(),
-            ])
+            fn () => new StepCollection(
+                [
+                    app(LanguageSettingsStep::class),
+                    app(ServerRequirementsStep::class),
+                    app(DatabaseRequirementsStep::class),
+                    app(AccountDetailsStep::class),
+                    app(FinalizeStep::class),
+                ]
+            )
         );
     }
 
@@ -88,13 +100,15 @@ class InstallationServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        /**
-         * @var $core Core
-         */
+        /** @var $core Core */
         $core = app(Core::class);
 
         $core->registerPackage(app(InstallationModule::class));
         $this->setLanguage();
+
+        Artisan::call('vendor:publish', [
+            '--tag' => 'gaming-engine:installation-resources',
+        ]);
     }
 
     private function setLanguage(): void

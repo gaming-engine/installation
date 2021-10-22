@@ -14,12 +14,12 @@ class FileRequirements extends BaseServerRequirement
 
     public function name(): string
     {
-        return __('gaming-engine:installation::requirements.server.file.name');
+        return (string)__('gaming-engine:installation::requirements.server.file.title');
     }
 
     public function description(): string
     {
-        return __('gaming-engine:installation::requirements.server.file.description');
+        return (string)__('gaming-engine:installation::requirements.server.file.description');
     }
 
     public function checks(): array

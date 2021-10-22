@@ -39,7 +39,7 @@ class LanguageSettingsTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.settings.language.name"),
+            __("gaming-engine:installation::requirements.settings.language.title"),
             $result
         );
     }

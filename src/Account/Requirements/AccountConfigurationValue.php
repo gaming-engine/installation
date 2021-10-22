@@ -8,7 +8,7 @@ class AccountConfigurationValue extends ConfigurationValue
 {
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.name");
+        return __("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.title");
     }
 
     public function description(): string

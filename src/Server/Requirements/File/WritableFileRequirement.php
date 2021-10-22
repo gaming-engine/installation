@@ -18,7 +18,7 @@ class WritableFileRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.file.writable.message',
             [
                 'name' => $this->pathName,

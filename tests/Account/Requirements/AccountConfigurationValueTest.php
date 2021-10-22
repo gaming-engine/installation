@@ -47,7 +47,7 @@ class AccountConfigurationValueTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.account.configuration.{$attribute}.name"),
+            __("gaming-engine:installation::requirements.account.configuration.{$attribute}.title"),
             $name
         );
     }

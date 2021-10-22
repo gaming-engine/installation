@@ -16,7 +16,7 @@ class PHPExtensionRequirement implements RequirementDetail
 
     public function description(): string
     {
-        return __(
+        return (string)__(
             'gaming-engine:installation::requirements.server.php.extension.message',
             [
                 'extension' => $this->extension,

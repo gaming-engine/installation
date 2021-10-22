@@ -49,7 +49,7 @@ class DatabaseConfigurationValueTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.database.configuration.{$attribute}.name"),
+            __("gaming-engine:installation::requirements.database.configuration.{$attribute}.title"),
             $name
         );
     }

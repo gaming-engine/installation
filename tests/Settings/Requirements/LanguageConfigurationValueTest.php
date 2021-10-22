@@ -19,7 +19,8 @@ class LanguageConfigurationValueTest extends TestCase
         // Arrange
         $subject = new LanguageConfigurationValue([
             'attribute' => $attribute = $this->faker->slug,
-            'value' => 'hi',
+            'configurationKey' => 'config',
+            'environmentVariable' => 'FOO',
         ]);
 
         // Act
@@ -27,7 +28,7 @@ class LanguageConfigurationValueTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.settings.language.{$attribute}.name"),
+            __("gaming-engine:installation::requirements.settings.language.{$attribute}.title"),
             $result
         );
     }
@@ -40,7 +41,8 @@ class LanguageConfigurationValueTest extends TestCase
         // Arrange
         $subject = new LanguageConfigurationValue([
             'attribute' => $attribute = $this->faker->slug,
-            'value' => 'hi',
+            'configurationKey' => 'config',
+            'environmentVariable' => 'hi',
         ]);
 
         // Act
@@ -68,6 +70,8 @@ class LanguageConfigurationValueTest extends TestCase
 
         $subject = new LanguageConfigurationValue([
             'attribute' => 'foo',
+            'configurationKey' => 'config',
+            'environmentVariable' => 'hi',
         ]);
 
         // Act

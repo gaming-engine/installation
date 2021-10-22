@@ -2,9 +2,6 @@
 
 namespace GamingEngine\Installation\Models\Database;
 
-use JetBrains\PhpStorm\Immutable;
-
-#[Immutable]
 class DatabaseConfiguration
 {
     public ?string $engine;

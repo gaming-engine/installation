@@ -6,9 +6,6 @@ use Illuminate\Support\Collection;
 
 class StepCollection
 {
-    /**
-     * @var Collection<Step>
-     */
     private Collection $steps;
 
     /**

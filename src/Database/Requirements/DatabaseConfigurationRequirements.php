@@ -22,7 +22,7 @@ class DatabaseConfigurationRequirements implements Requirement
 
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.database.configuration.name");
+        return __("gaming-engine:installation::requirements.database.configuration.title");
     }
 
     public function description(): string

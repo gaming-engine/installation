@@ -20,7 +20,3 @@ export default {
   name: 'account-details-icon',
 };
 </script>
-
-<style scoped>
-
-</style>

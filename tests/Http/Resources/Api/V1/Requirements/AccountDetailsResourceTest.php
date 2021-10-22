@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Tests\Api\V1\Requirements;
 
-use GamingEngine\Installation\Account\Http\Api\V1\Resources\AccountDetailsResource;
+use GamingEngine\Installation\Account\Http\Resources\Api\V1\AccountDetailsResource;
 use GamingEngine\Installation\Account\Requirements\AccountConfigurationRequirements;
 use GamingEngine\Installation\Account\Steps\AccountDetailsStep;
 use GamingEngine\Installation\Http\Resources\Api\V1\Requirements\ConfigurationResource;

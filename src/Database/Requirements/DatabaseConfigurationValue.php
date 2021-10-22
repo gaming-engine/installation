@@ -8,11 +8,11 @@ class DatabaseConfigurationValue extends EnvironmentConfigurationValue
 {
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.database.configuration.{$this->attribute}.name");
+        return (string)__("gaming-engine:installation::requirements.database.configuration.{$this->attribute}.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.database.configuration.{$this->attribute}.description");
+        return (string)__("gaming-engine:installation::requirements.database.configuration.{$this->attribute}.description");
     }
 }

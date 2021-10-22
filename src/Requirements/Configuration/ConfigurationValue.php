@@ -4,7 +4,6 @@ namespace GamingEngine\Installation\Requirements\Configuration;
 
 use GamingEngine\Installation\Requirements\RequirementDetail;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\ArrayShape;
 
 abstract class ConfigurationValue implements RequirementDetail
 {
@@ -13,11 +12,6 @@ abstract class ConfigurationValue implements RequirementDetail
     protected bool $nullable;
     private ?string $override;
 
-    #[ArrayShape([
-        'attribute' => 'string',
-        'value' => 'string',
-        'nullable' => '?boolean',
-    ])]
     public function __construct(array $arguments)
     {
         $this->attribute = $arguments['attribute'];
@@ -55,7 +49,7 @@ abstract class ConfigurationValue implements RequirementDetail
         return $this->value;
     }
 
-    public function override(?string $value)
+    public function override(?string $value): void
     {
         if (! $this->nullable() && empty($value)) {
             throw new InvalidArgumentException($this->name());

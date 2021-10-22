@@ -36,7 +36,7 @@ class ConnectsToDatabaseRequirementTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            __("gaming-engine:installation::requirements.database.connection.name"),
+            __("gaming-engine:installation::requirements.database.connection.title"),
             $name
         );
     }

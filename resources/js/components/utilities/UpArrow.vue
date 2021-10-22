@@ -11,7 +11,3 @@ export default {
   name: 'up-arrow',
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -22,12 +22,12 @@ class LanguageSettings implements Requirement
 
     public function name(): string
     {
-        return __("gaming-engine:installation::requirements.settings.language.name");
+        return (string)__("gaming-engine:installation::requirements.settings.language.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.settings.language.description");
+        return (string)__("gaming-engine:installation::requirements.settings.language.description");
     }
 
     public function check(): bool
@@ -41,7 +41,8 @@ class LanguageSettings implements Requirement
         $components = collect([
             new LanguageConfigurationValue([
                 'attribute' => 'locale',
-                'value' => 'en',
+                'configurationKey' => 'locale',
+                'environmentVariable' => 'APP_LOCALE',
             ]),
         ])->keyBy(fn (LanguageConfigurationValue $value) => $value->attribute());
 

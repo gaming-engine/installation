@@ -19,7 +19,7 @@ class DatabaseConnection implements RequirementDetail
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.database.connection.description");
+        return (string)__("gaming-engine:installation::requirements.database.connection.description");
     }
 
     public function check(): bool
