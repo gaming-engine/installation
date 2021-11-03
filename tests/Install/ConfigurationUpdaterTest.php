@@ -42,7 +42,7 @@ class ConfigurationUpdaterTest extends TestCase
         // Arrange
         $subject = new ConfigurationUpdater(
             $this->mock(Writer::class),
-            $path = $this->faker->filePath()
+            $path = $this->faker->slug
         );
 
         // Act
@@ -63,7 +63,7 @@ class ConfigurationUpdaterTest extends TestCase
         // Arrange
         $subject = new ConfigurationUpdater(
             $writer = $this->mock(Writer::class),
-            $path = $this->faker->filePath()
+            $path = $this->faker->slug
         );
 
         File::shouldReceive('copy')

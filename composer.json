@@ -67,11 +67,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://gaming-engine.gitlab.io/packages/"
-        }
-    ]
+    "prefer-stable": true
 }
