@@ -3,7 +3,7 @@
 namespace GamingEngine\Installation\Tests\Account\Requirements;
 
 use GamingEngine\Installation\Account\Requirements\AccountConfigurationRequirements;
-use GamingEngine\Installation\Account\Requirements\AccountConfigurationValue;
+use GamingEngine\Installation\Account\Requirements\SiteConfigurationValue;
 use GamingEngine\Installation\Requirements\RequirementDetail;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -95,7 +95,7 @@ class AccountConfigurationRequirementsTest extends TestCase
 
         // Act
         $response = $subject->components()
-            ->first(fn (AccountConfigurationValue $value) => $value->attribute() === 'email');
+            ->first(fn (SiteConfigurationValue $value) => $value->attribute() === 'email');
 
         // Assert
         $this->assertNotNull($response);

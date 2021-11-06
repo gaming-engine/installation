@@ -17,6 +17,7 @@ use GamingEngine\Installation\Install\UpdatesConfiguration;
 use GamingEngine\Installation\Module\InstallationModule;
 use GamingEngine\Installation\Server\Steps\ServerRequirementsStep;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
+use GamingEngine\Installation\Settings\Steps\SiteDetailsStep;
 use GamingEngine\Installation\Steps\StepCollection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
@@ -69,6 +70,7 @@ class InstallationServiceProvider extends PackageServiceProvider
                     app(LanguageSettingsStep::class),
                     app(ServerRequirementsStep::class),
                     app(DatabaseRequirementsStep::class),
+                    app(SiteDetailsStep::class),
                     app(AccountDetailsStep::class),
                     app(FinalizeStep::class),
                 ]

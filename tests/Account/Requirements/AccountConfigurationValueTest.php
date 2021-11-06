@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Tests\Account\Requirements;
 
-use GamingEngine\Installation\Account\Requirements\AccountConfigurationValue;
+use GamingEngine\Installation\Account\Requirements\SiteConfigurationValue;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 
@@ -16,7 +16,7 @@ class AccountConfigurationValueTest extends TestCase
     public function account_configuration_value_description()
     {
         // Arrange
-        $subject = new AccountConfigurationValue([
+        $subject = new SiteConfigurationValue([
             'attribute' => $attribute = $this->faker->slug,
             'value' => $this->faker->text,
         ]);
@@ -37,7 +37,7 @@ class AccountConfigurationValueTest extends TestCase
     public function account_configuration_value_name()
     {
         // Arrange
-        $subject = new AccountConfigurationValue([
+        $subject = new SiteConfigurationValue([
             'attribute' => $attribute = $this->faker->slug,
             'value' => $this->faker->text,
         ]);

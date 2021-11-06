@@ -5,7 +5,7 @@ namespace GamingEngine\Installation\Account\Steps;
 use GamingEngine\Core\Account\DataTransfer\UserDTO;
 use GamingEngine\Core\Account\Repositories\UserRepository;
 use GamingEngine\Installation\Account\Requirements\AccountConfigurationRequirements;
-use GamingEngine\Installation\Account\Requirements\AccountConfigurationValue;
+use GamingEngine\Installation\Account\Requirements\SiteConfigurationValue;
 use GamingEngine\Installation\Steps\BaseConfigurationStep;
 use Illuminate\Support\Collection;
 
@@ -32,9 +32,9 @@ class AccountDetailsStep extends BaseConfigurationStep
             ->first()
             ->components()
             ->keyBy(fn (
-                AccountConfigurationValue $value
+                SiteConfigurationValue $value
             ) => $value->attribute())
-            ->map(fn (AccountConfigurationValue $value) => $value->value())
+            ->map(fn (SiteConfigurationValue $value) => $value->value())
             ->toArray();
 
         $this->userRepository->create(new UserDTO($configuration));

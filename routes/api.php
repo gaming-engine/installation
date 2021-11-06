@@ -6,6 +6,7 @@ use GamingEngine\Installation\Http\Controllers\Api\V1\StepController;
 use GamingEngine\Installation\Install\Http\Controllers\Api\V1\FinalizeController;
 use GamingEngine\Installation\Server\Http\Controllers\Api\V1\ServerRequirementsController;
 use GamingEngine\Installation\Settings\Http\Controllers\Api\V1\LanguageController;
+use GamingEngine\Installation\Settings\Http\Controllers\Api\V1\SiteDetailsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('steps', StepController::class)
@@ -67,5 +68,15 @@ Route::prefix('server')
             ->name('requirements');
 
         Route::put('requirements', [ServerRequirementsController::class, 'apply'])
+            ->name('requirements.apply');
+    });
+
+Route::prefix('site-details')
+    ->name('site-details.')
+    ->group(function () {
+        Route::get('requirements', [SiteDetailsController::class, 'index'])
+            ->name('requirements');
+
+        Route::put('requirements', [SiteDetailsController::class, 'apply'])
             ->name('requirements.apply');
     });

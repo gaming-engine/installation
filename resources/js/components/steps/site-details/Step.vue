@@ -2,36 +2,42 @@
     <form v-if="hasConfigurations" class="md:w-1/2 m-auto" method="post" @submit.prevent="submit">
         <component
             :is="'input-field'"
-            id="account.email"
-            v-model="form.email"
-            :description="configurations.email.description"
+            id="site.name"
+            v-model="form.name"
+            :description="configurations.name.description"
             :disabled="disabled"
-            :label="configurations.email.name"
+            :label="configurations.name.title"
             :required="!configurations.email.nullable"
             class="mb-3"
         />
 
         <component
             :is="'input-field'"
-            id="account.name"
-            v-model="form.name"
-            :description="configurations.name.description"
+            id="site.domain"
+            v-model="form.domain"
+            :description="configurations.domain.description"
             :disabled="disabled"
-            :label="configurations.name.name"
-            :required="!configurations.name.nullable"
+            :label="configurations.domain.name"
+            :required="!configurations.domain.nullable"
             class="mb-3"
         />
 
-        <component
-            :is="'password-field'"
-            id="account.host"
-            v-model="form.password"
-            :description="configurations.password.description"
-            :disabled="disabled"
-            :label="configurations.password.name"
-            :required="!configurations.password.nullable"
-            class="mb-3"
-        />
+        <div
+            v-if="!isSecure"
+            ref="warning"
+            class="
+            bg-yellow-100
+            border-l-4
+            border-yellow-500
+            text-yellow-700
+            p-4
+            mb-4
+            "
+            role="alert"
+        >
+            <p class="font-bold">{{ connectivity.title }}</p>
+            <p>{{ connectivity.description }}</p>
+        </div>
 
         <div class="text-center">
             <component
@@ -51,11 +57,11 @@
 
 <script>
 import axios from 'axios';
-import InterpretResponse from '@mixins/interpret-response';
-import HasState from '@mixins/state';
+import HasState from '@mixins/state.js';
+import InterpretResponse from '@mixins/interpret-response.js';
 
 export default {
-  name: 'account-requirements',
+  name: 'site-details',
   data: () => ({
     validations: [],
     collapsed: {},
@@ -77,9 +83,12 @@ export default {
       return 'idle' !== this.state;
     },
     hasConfigurations() {
-      return 0 < Object.keys(this.configurations).length;
+      return 0 < Object.keys(this.configurations).length && false;
     },
-    url: () => '/api/v1/installation/account/requirements',
+    url: () => '/api/v1/installation/site-details/requirements',
+    isSecure() {
+      return this.form.domain.startsWith('https');
+    },
   },
 
   async created() {

@@ -86,22 +86,6 @@ return [
         "title" => "Server Requirements",
     ],
     "settings" => [
-        "date" => [
-            "date-format" => [
-                "description" => "How would you like the dates in the application to be displayed?",
-                "title" => "Date Format",
-            ],
-            "description" => "Define how the game will deal with the displaying of dates.",
-            "time-format" => [
-                "description" => "How would you like the times in the application to be displayed?",
-                "title" => "Time Format",
-            ],
-            "timezone" => [
-                "description" => "What timezone would you like the application to run in?",
-                "title" => "Timezone",
-            ],
-            "title" => "Date Settings",
-        ],
         "description" => "Customize your site",
         "language" => [
             "button" => "Select Language",
@@ -115,6 +99,7 @@ return [
             ],
             "title" => "Language",
         ],
+        "site" => ["description" => "Customize your Site", "title" => "Site Details"],
         "title" => "Settings",
     ],
 ];
