@@ -7,31 +7,31 @@ jest.mock('axios');
 describe('database requirements step', () => {
   const sampleConfigurations = {
     engine: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
     },
     host: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
     },
     'database-name': {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
     },
     username: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
     },
     password: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
