@@ -14,7 +14,7 @@ class StepResource extends JsonResource
     {
         return [
             'identifier' => $this->resource->identifier(),
-            'name' => $this->resource->name(),
+            'title' => $this->resource->title(),
             'is_complete' => $this->resource->isComplete(),
             'apply' => route(
                 "api.v1.installation.{$this->resource->identifier()}.requirements.apply"

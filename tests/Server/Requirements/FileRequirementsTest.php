@@ -20,7 +20,7 @@ class FileRequirementsTest extends TestCase
         // Assert
         $this->assertEquals(
             'File Requirements',
-            $subject->name()
+            $subject->title()
         );
     }
 

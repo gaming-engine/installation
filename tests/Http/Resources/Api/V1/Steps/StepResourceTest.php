@@ -1,6 +1,6 @@
 <?php
 
-namespace GamingEngine\Installation\Tests\Api\V1\Steps;
+namespace GamingEngine\Installation\Tests\Http\Resources\Api\V1\Steps;
 
 use GamingEngine\Installation\Http\Resources\Api\V1\Steps\StepResource;
 use GamingEngine\Installation\Steps\Step;
@@ -25,8 +25,8 @@ class StepResourceTest extends TestCase
 
         $resource->shouldReceive('identifier')
             ->andReturn($identifier = $this->faker->slug);
-        $resource->shouldReceive('name')
-            ->andReturn($name = $this->faker->name);
+        $resource->shouldReceive('title')
+            ->andReturn($title = $this->faker->name);
         $resource->shouldReceive('isComplete')
             ->andReturn($complete = $this->faker->boolean);
 
@@ -40,8 +40,8 @@ class StepResourceTest extends TestCase
             $response['identifier']
         );
         $this->assertEquals(
-            $name,
-            $response['name']
+            $title,
+            $response['title']
         );
         $this->assertEquals(
             $complete,

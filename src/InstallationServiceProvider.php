@@ -11,9 +11,9 @@ use GamingEngine\Installation\Database\Steps\DatabaseRequirementsStep;
 use GamingEngine\Installation\Helpers\PHP\PHPDetails;
 use GamingEngine\Installation\Helpers\PHP\PHPFeatureInformation;
 use GamingEngine\Installation\Http\View\Components\WizardComponent;
-use GamingEngine\Installation\Install\ConfigurationUpdater;
+use GamingEngine\Installation\Install\EnvironmentUpdater;
 use GamingEngine\Installation\Install\Steps\FinalizeStep;
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Module\InstallationModule;
 use GamingEngine\Installation\Server\Steps\ServerRequirementsStep;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
@@ -42,8 +42,8 @@ class InstallationServiceProvider extends PackageServiceProvider
         );
 
         $this->app->singleton(
-            UpdatesConfiguration::class,
-            ConfigurationUpdater::class
+            UpdatesEnvironment::class,
+            EnvironmentUpdater::class
         );
 
         $package

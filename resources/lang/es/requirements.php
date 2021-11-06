@@ -102,7 +102,12 @@ return [
             ],
             "title" => "idioma",
         ],
-        "site" => ["description" => "", "title" => ""],
+        "site" => [
+            "description" => "",
+            "domain" => ["description" => "", "title" => ""],
+            "name" => ["description" => "", "title" => ""],
+            "title" => "",
+        ],
         "title" => "Ajustes",
     ],
 ];

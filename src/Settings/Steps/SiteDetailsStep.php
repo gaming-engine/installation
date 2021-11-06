@@ -2,16 +2,23 @@
 
 namespace GamingEngine\Installation\Settings\Steps;
 
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Core\Configuration\Repositories\ConfigurationRepository;
+use GamingEngine\Core\Configuration\SiteConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Settings\Requirements\SiteDetails;
 use GamingEngine\Installation\Steps\BaseConfigurationStep;
+use GamingEngine\StringTools\StringHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class SiteDetailsStep extends BaseConfigurationStep
 {
-    public function __construct(private Request $request, private UpdatesConfiguration $configuration)
-    {
+    public function __construct(
+        private Request $request,
+        private UpdatesEnvironment $environmentUpdater,
+        private ConfigurationRepository $configurationRepository,
+        private SiteConfiguration $siteConfiguration
+    ) {
         parent::__construct();
     }
 
@@ -20,9 +27,43 @@ class SiteDetailsStep extends BaseConfigurationStep
         return 'site-details';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.settings.site.title');
+    }
+
+    public function apply(): void
+    {
+        $this->environmentUpdater->update([
+            'APP_URL' => $this->deriveUrl(),
+        ], 'site-details');
+
+        $this->configurationRepository->update(
+            SiteConfiguration::fromConfiguration(
+                $this->siteConfiguration,
+                [
+                    'name' => $this->siteDetails()->siteName(),
+                ]
+            )
+        );
+    }
+
+    private function deriveUrl(): string
+    {
+        return StringHelper::template(
+            '{scheme}://{host}',
+            [
+                'scheme' => $this->request->getScheme(),
+                'host' => $this->siteDetails()
+                    ->domain(),
+            ]
+        );
+    }
+
+    private function siteDetails(): SiteDetails
+    {
+        return $this->checks()
+            ->first(fn ($check) => $check instanceof SiteDetails);
     }
 
     /**
@@ -33,9 +74,5 @@ class SiteDetailsStep extends BaseConfigurationStep
         return collect([
             new SiteDetails($this->request, $this->overrides()),
         ]);
-    }
-
-    public function apply(): void
-    {
     }
 }

@@ -8,7 +8,7 @@ interface Requirement
 {
     public function identifier(): string;
 
-    public function name(): string;
+    public function title(): string;
 
     public function description(): string;
 

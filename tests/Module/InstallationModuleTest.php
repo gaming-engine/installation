@@ -27,7 +27,7 @@ class InstallationModuleTest extends TestCase
     /**
      * @test
      */
-    public function installation_module_provides_the_correct_ame()
+    public function installation_module_provides_the_correct_name()
     {
         // Arrange
         $subject = new InstallationModule();

@@ -72,7 +72,7 @@ class LanguageControllerTest extends TestCase
         $requirements
             ->checks()
             ->each(function (Requirement $requirement) use ($response) {
-                $response->assertSeeText($requirement->name());
+                $response->assertSeeText($requirement->title());
             });
     }
 
@@ -135,7 +135,7 @@ class LanguageControllerTest extends TestCase
         $requirements
             ->checks()
             ->each(function (Requirement $requirement) use ($response) {
-                $response->assertSeeText($requirement->name());
+                $response->assertSeeText($requirement->title());
             });
     }
 

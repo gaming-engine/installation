@@ -6,7 +6,7 @@
             v-model="form.email"
             :description="configurations.email.description"
             :disabled="disabled"
-            :label="configurations.email.name"
+            :label="configurations.email.title"
             :required="!configurations.email.nullable"
             class="mb-3"
         />
@@ -17,7 +17,7 @@
             v-model="form.name"
             :description="configurations.name.description"
             :disabled="disabled"
-            :label="configurations.name.name"
+            :label="configurations.name.title"
             :required="!configurations.name.nullable"
             class="mb-3"
         />
@@ -28,7 +28,7 @@
             v-model="form.password"
             :description="configurations.password.description"
             :disabled="disabled"
-            :label="configurations.password.name"
+            :label="configurations.password.title"
             :required="!configurations.password.nullable"
             class="mb-3"
         />

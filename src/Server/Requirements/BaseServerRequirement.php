@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 abstract class BaseServerRequirement implements Requirement
 {
-    abstract public function name(): string;
+    abstract public function title(): string;
 
     public function check(): bool
     {

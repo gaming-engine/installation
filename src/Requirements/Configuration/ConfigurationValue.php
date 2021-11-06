@@ -52,11 +52,11 @@ abstract class ConfigurationValue implements RequirementDetail
     public function override(?string $value): void
     {
         if (! $this->nullable() && empty($value)) {
-            throw new InvalidArgumentException($this->name());
+            throw new InvalidArgumentException($this->title());
         }
 
         $this->override = $value;
     }
 
-    abstract public function name(): string;
+    abstract public function title(): string;
 }

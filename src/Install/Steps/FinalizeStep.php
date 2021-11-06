@@ -2,13 +2,13 @@
 
 namespace GamingEngine\Installation\Install\Steps;
 
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Steps\BaseStep;
 use Illuminate\Support\Collection;
 
 class FinalizeStep extends BaseStep
 {
-    public function __construct(private UpdatesConfiguration $configuration)
+    public function __construct(private UpdatesEnvironment $configuration)
     {
     }
 
@@ -17,7 +17,7 @@ class FinalizeStep extends BaseStep
         return 'finalize';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.finalize.title');
     }

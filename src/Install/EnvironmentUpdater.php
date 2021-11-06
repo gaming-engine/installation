@@ -6,7 +6,7 @@ use GamingEngine\DotEnv\Writer;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
-class ConfigurationUpdater implements UpdatesConfiguration
+class EnvironmentUpdater implements UpdatesEnvironment
 {
     public function __construct(
         private Writer $writer,

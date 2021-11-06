@@ -20,7 +20,7 @@ class LanguageSettings implements Requirement
         return 'language';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__("gaming-engine:installation::requirements.settings.language.title");
     }

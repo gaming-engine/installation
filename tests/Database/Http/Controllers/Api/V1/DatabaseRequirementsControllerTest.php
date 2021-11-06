@@ -72,7 +72,7 @@ class DatabaseRequirementsControllerTest extends TestCase
         $requirements
             ->checks()
             ->each(function (Requirement $requirement) use ($response) {
-                $response->assertSeeText($requirement->name());
+                $response->assertSeeText($requirement->title());
             });
     }
 
@@ -144,7 +144,7 @@ class DatabaseRequirementsControllerTest extends TestCase
         $requirements
             ->checks()
             ->each(function (Requirement $requirement) use ($response) {
-                $response->assertSeeText($requirement->name());
+                $response->assertSeeText($requirement->title());
             });
     }
 

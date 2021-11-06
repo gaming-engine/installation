@@ -20,10 +20,10 @@ class PHPRequirementsTest extends TestCase
 
         // Assert
         $this->assertTrue(
-            Str::contains($subject->name(), 'PHP Requirements')
+            Str::contains($subject->title(), 'PHP Requirements')
         );
         $this->assertTrue(
-            Str::contains($subject->name(), phpversion())
+            Str::contains($subject->title(), phpversion())
         );
     }
 

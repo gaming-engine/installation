@@ -9,7 +9,7 @@ abstract class BaseStep implements Step
 {
     abstract public function identifier(): string;
 
-    abstract public function name(): string;
+    abstract public function title(): string;
 
     public function isComplete(): bool
     {

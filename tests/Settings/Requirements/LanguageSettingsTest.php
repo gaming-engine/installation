@@ -35,7 +35,7 @@ class LanguageSettingsTest extends TestCase
         $subject = new LanguageSettings();
 
         // Act
-        $result = $subject->name();
+        $result = $subject->title();
 
         // Assert
         $this->assertEquals(

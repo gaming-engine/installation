@@ -6,7 +6,7 @@ use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfiguratio
 
 class DatabaseConfigurationValue extends EnvironmentConfigurationValue
 {
-    public function name(): string
+    public function title(): string
     {
         return (string)__("gaming-engine:installation::requirements.database.configuration.{$this->attribute}.title");
     }

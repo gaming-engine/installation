@@ -5,7 +5,7 @@
                 <div @click="collapsed[index] = !collapsed[index]">
                     <component :is="collapsed[index] ? 'up-arrow' : 'down-arrow'"></component>
                     <component :is="check.is_complete ? 'complete' : 'incomplete'"></component>
-                    <strong>{{ check.name }}</strong>
+                    <strong>{{ check.title }}</strong>
 
                     <span
                         class="
