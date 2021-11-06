@@ -7,19 +7,19 @@ jest.mock('axios');
 describe('account settings step', () => {
   const sampleConfigurations = {
     email: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'bar',
       nullable: false,
     },
     name: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
     },
     password: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foobar',
       nullable: false,

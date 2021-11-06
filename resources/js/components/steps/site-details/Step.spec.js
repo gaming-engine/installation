@@ -4,24 +4,18 @@ import Step from './Step.vue';
 
 jest.mock('axios');
 
-describe('account settings step', () => {
+describe('site details step', () => {
   const sampleConfigurations = {
-    email: {
-      name: 'foo',
+    domain: {
+      title: 'foo',
       description: 'foo',
       value: 'bar',
       nullable: false,
     },
     name: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
-      nullable: false,
-    },
-    password: {
-      name: 'foo',
-      description: 'foo',
-      value: 'foobar',
       nullable: false,
     },
   };
@@ -47,7 +41,7 @@ describe('account settings step', () => {
 
       expect(axios.get)
         .toHaveBeenCalledWith(
-          '/api/v1/installation/account/requirements',
+          '/api/v1/installation/site-details/requirements',
         );
     });
   });
@@ -96,7 +90,7 @@ describe('account settings step', () => {
         expect(axios.post)
           .not
           .toHaveBeenCalledWith(
-            '/api/v1/installation/account/requirements',
+            '/api/v1/installation/site-details/requirements',
           );
       });
 
@@ -164,8 +158,7 @@ describe('account settings step', () => {
         expect(vm.form)
           .toEqual({
             name: 'foo',
-            email: 'bar',
-            password: 'foobar',
+            domain: 'bar',
           });
       });
     });

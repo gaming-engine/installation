@@ -7,7 +7,7 @@ jest.mock('axios');
 describe('language step', () => {
   const sampleConfigurations = {
     locale: {
-      name: 'foo',
+      title: 'foo',
       description: 'foo',
       value: 'foo',
       nullable: false,
