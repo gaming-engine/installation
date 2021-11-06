@@ -42,8 +42,8 @@
 
 <script>
 import axios from 'axios';
-import InterpretResponse from '../../../mixins/interpret-response';
-import HasState from '../../../mixins/state';
+import HasState from '@mixins/state';
+import InterpretResponse from '@mixins/interpret-response';
 
 export default {
   name: 'language',

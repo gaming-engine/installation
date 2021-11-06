@@ -41,7 +41,8 @@ mix.options(options).extract()
     resolve: {
       symlinks: false,
       alias: {
-        '@': path.resolve(__dirname, 'resources/js/'),
+        '@mixins': path.resolve(__dirname, 'resources/js/mixins'),
+        '@components': path.resolve(__dirname, 'resources/js/components'),
       },
     },
     plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],

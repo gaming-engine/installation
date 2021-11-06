@@ -6,7 +6,7 @@
             v-model="form.engine"
             :description="configurations.engine.description"
             :disabled="disabled"
-            :label="configurations.engine.name"
+            :label="configurations.engine.title"
             :options="databaseOptions"
             :required="!configurations.engine.nullable"
             class="mb-3"
@@ -17,7 +17,7 @@
             v-model="form.host"
             :description="configurations.host.description"
             :disabled="disabled"
-            :label="configurations.host.name"
+            :label="configurations.host.title"
             :required="!configurations.host.nullable"
             class="mb-3"
         />
@@ -27,7 +27,7 @@
             v-model="form['database-name']"
             :description="configurations['database-name'].description"
             :disabled="disabled"
-            :label="configurations['database-name'].name"
+            :label="configurations['database-name'].title"
             :required="!configurations['database-name'].nullable"
             class="mb-3"
         />
@@ -37,7 +37,7 @@
             v-model="form.username"
             :description="configurations.username.description"
             :disabled="disabled"
-            :label="configurations.username.name"
+            :label="configurations.username.title"
             :required="!configurations.username.nullable"
             class="mb-3"
         />
@@ -47,7 +47,7 @@
             v-model="form.password"
             :description="configurations.password.description"
             :disabled="disabled"
-            :label="configurations.password.name"
+            :label="configurations.password.title"
             :required="!configurations.password.nullable"
             autocomplete="database-password"
             class="mb-3"
@@ -65,7 +65,7 @@
             "
             role="alert"
         >
-            <p class="font-bold">{{ configurations.password.name }}</p>
+            <p class="font-bold">{{ configurations.password.title }}</p>
             <p>{{ resources.configuration.password.warning }}</p>
         </div>
 
@@ -82,7 +82,7 @@
             "
             role="alert"
         >
-            <p class="font-bold">{{ connectivity.name }}</p>
+            <p class="font-bold">{{ connectivity.title }}</p>
             <p>{{ connectivity.description }}</p>
         </div>
 
@@ -103,8 +103,8 @@
 
 <script>
 import axios from 'axios';
-import InterpretResponse from '../../../mixins/interpret-response';
-import HasState from '../../../mixins/state';
+import InterpretResponse from '@mixins/interpret-response';
+import HasState from '@mixins/state';
 
 export default {
   name: 'database-requirements',

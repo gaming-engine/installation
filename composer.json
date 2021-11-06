@@ -19,6 +19,7 @@
         "php": "^8.0|^8.1",
         "gaming-engine/core": "*",
         "gaming-engine/dotenv-writer": "^1.0",
+        "gaming-engine/string-tools": "^1.0",
         "illuminate/contracts": "^8.37",
         "spatie/data-transfer-object": "^3.7",
         "spatie/laravel-package-tools": "^1.4.3"

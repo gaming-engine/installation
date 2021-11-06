@@ -90,9 +90,9 @@
 
 <script>
 import axios from 'axios';
-import Spinner from '../../utilities/Spinner.vue';
-import Complete from '../../utilities/Complete.vue';
-import Error from '../../utilities/Error.vue';
+import Error from '@components/utilities/Error.vue';
+import Spinner from '@components/utilities/Spinner.vue';
+import Complete from '@components/utilities/Complete.vue';
 
 export default {
   name: 'finalize-installation',

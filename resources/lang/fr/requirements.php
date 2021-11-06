@@ -89,22 +89,6 @@ return [
         "title" => "Exigences du serveur",
     ],
     "settings" => [
-        "date" => [
-            "date-format" => [
-                "description" => "Comment voulez-vous que les dates soient affichées dans l'application ?",
-                "title" => "Format de la date",
-            ],
-            "description" => "Définissez comment le jeu va gérer l'affichage des dates.",
-            "time-format" => [
-                "description" => "Comment voulez-vous que les heures de l'application soient affichées ?",
-                "title" => "Format de l'heure",
-            ],
-            "timezone" => [
-                "description" => "Dans quel fuseau horaire souhaitez-vous que l'application fonctionne ?",
-                "title" => "Fuseau horaire",
-            ],
-            "title" => "Paramètres de la date",
-        ],
         "description" => "Personnalisez votre site",
         "language" => [
             "button" => "Sélectionnez une langue",
@@ -118,6 +102,7 @@ return [
             ],
             "title" => "Langue",
         ],
+        "site" => ["description" => "", "title" => ""],
         "title" => "Paramètres",
     ],
 ];

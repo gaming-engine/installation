@@ -7,7 +7,7 @@ use GamingEngine\Installation\Account\Http\Controllers\Api\V1\AccountDetailsCont
 use GamingEngine\Installation\Account\Http\Requests\Api\V1\OverrideRequest;
 use GamingEngine\Installation\Account\Http\Resources\Api\V1\AccountDetailsResource;
 use GamingEngine\Installation\Account\Requirements\AccountConfigurationRequirements;
-use GamingEngine\Installation\Account\Requirements\AccountConfigurationValue;
+use GamingEngine\Installation\Account\Requirements\SiteConfigurationValue;
 use GamingEngine\Installation\Account\Steps\AccountDetailsStep;
 use GamingEngine\Installation\Requirements\Requirement;
 use GamingEngine\Installation\Tests\TestCase;
@@ -114,8 +114,8 @@ class AccountDetailsControllerTest extends TestCase
                 fn (Requirement $requirement) => $requirement instanceof AccountConfigurationRequirements
             )
             ->components()
-            ->keyBy(fn (AccountConfigurationValue $configurationValue) => $configurationValue->attribute())
-            ->map(fn (AccountConfigurationValue $configurationValue) => $this->faker->slug)
+            ->keyBy(fn (SiteConfigurationValue $configurationValue) => $configurationValue->attribute())
+            ->map(fn (SiteConfigurationValue $configurationValue) => $this->faker->slug)
             ->toArray();
 
         // Act
