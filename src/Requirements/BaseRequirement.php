@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 
 abstract class BaseRequirement implements Requirement
 {
-    abstract public function name(): string;
+    abstract public function title(): string;
 
     abstract public function description(): string;
 

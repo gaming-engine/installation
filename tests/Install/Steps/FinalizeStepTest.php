@@ -3,7 +3,7 @@
 namespace GamingEngine\Installation\Tests\Install\Steps;
 
 use GamingEngine\Installation\Install\Steps\FinalizeStep;
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Tests\TestCase;
 
 class FinalizeStepTest extends TestCase
@@ -35,7 +35,7 @@ class FinalizeStepTest extends TestCase
         $subject = app(FinalizeStep::class);
 
         // Act
-        $target = $subject->name();
+        $target = $subject->title();
 
         // Assert
         $this->assertEquals(
@@ -68,7 +68,7 @@ class FinalizeStepTest extends TestCase
     public function finalize_step_sets_the_installation_environment_variable()
     {
         // Arrange
-        $configuration = $this->mock(UpdatesConfiguration::class);
+        $configuration = $this->mock(UpdatesEnvironment::class);
         $subject = new FinalizeStep($configuration);
 
         $configuration->shouldReceive('update')

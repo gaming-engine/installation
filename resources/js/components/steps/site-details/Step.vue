@@ -7,7 +7,7 @@
             :description="configurations.name.description"
             :disabled="disabled"
             :label="configurations.name.title"
-            :required="!configurations.email.nullable"
+            :required="!configurations.name.nullable"
             class="mb-3"
         />
 
@@ -17,27 +17,10 @@
             v-model="form.domain"
             :description="configurations.domain.description"
             :disabled="disabled"
-            :label="configurations.domain.name"
+            :label="configurations.domain.title"
             :required="!configurations.domain.nullable"
             class="mb-3"
         />
-
-        <div
-            v-if="!isSecure"
-            ref="warning"
-            class="
-            bg-yellow-100
-            border-l-4
-            border-yellow-500
-            text-yellow-700
-            p-4
-            mb-4
-            "
-            role="alert"
-        >
-            <p class="font-bold">{{ connectivity.title }}</p>
-            <p>{{ connectivity.description }}</p>
-        </div>
 
         <div class="text-center">
             <component
@@ -53,15 +36,18 @@
             />
         </div>
     </form>
+    <spinner v-else></spinner>
 </template>
 
 <script>
 import axios from 'axios';
-import HasState from '@mixins/state.js';
-import InterpretResponse from '@mixins/interpret-response.js';
+import HasState from '@mixins/state';
+import InterpretResponse from '@mixins/interpret-response';
+import Spinner from '@components/utilities/Spinner';
 
 export default {
   name: 'site-details',
+  components: { Spinner },
   data: () => ({
     validations: [],
     collapsed: {},
@@ -83,12 +69,9 @@ export default {
       return 'idle' !== this.state;
     },
     hasConfigurations() {
-      return 0 < Object.keys(this.configurations).length && false;
+      return 0 < Object.keys(this.configurations).length;
     },
     url: () => '/api/v1/installation/site-details/requirements',
-    isSecure() {
-      return this.form.domain.startsWith('https');
-    },
   },
 
   async created() {

@@ -14,7 +14,7 @@ class EnvironmentConfigurationResource extends JsonResource
     {
         return [
             'attribute' => $this->resource->attribute(),
-            'title' => $this->resource->name(),
+            'title' => $this->resource->title(),
             'description' => $this->resource->description(),
             'value' => $this->resource->value(),
             'nullable' => $this->resource->nullable(),

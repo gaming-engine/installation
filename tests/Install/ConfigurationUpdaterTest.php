@@ -3,7 +3,7 @@
 namespace GamingEngine\Installation\Tests\Install;
 
 use GamingEngine\DotEnv\Writer;
-use GamingEngine\Installation\Install\ConfigurationUpdater;
+use GamingEngine\Installation\Install\EnvironmentUpdater;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
@@ -19,7 +19,7 @@ class ConfigurationUpdaterTest extends TestCase
     public function configuration_updater_path_defaults_to_the_environment_file()
     {
         // Arrange
-        $subject = new ConfigurationUpdater(
+        $subject = new EnvironmentUpdater(
             $this->mock(Writer::class),
             ''
         );
@@ -40,7 +40,7 @@ class ConfigurationUpdaterTest extends TestCase
     public function configuration_updater_path_accepts_a_different_path()
     {
         // Arrange
-        $subject = new ConfigurationUpdater(
+        $subject = new EnvironmentUpdater(
             $this->mock(Writer::class),
             $path = $this->faker->slug
         );
@@ -61,7 +61,7 @@ class ConfigurationUpdaterTest extends TestCase
     public function configuration_updater_path_updates_the_configuration()
     {
         // Arrange
-        $subject = new ConfigurationUpdater(
+        $subject = new EnvironmentUpdater(
             $writer = $this->mock(Writer::class),
             $path = $this->faker->slug
         );

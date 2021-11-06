@@ -5,7 +5,7 @@ namespace GamingEngine\Installation\Tests\Database\Steps;
 use GamingEngine\Installation\Database\Exceptions\MigrationException;
 use GamingEngine\Installation\Database\Exceptions\PublishException;
 use GamingEngine\Installation\Database\Steps\DatabaseRequirementsStep;
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Command\Command;
@@ -39,7 +39,7 @@ class DatabaseRequirementsStepTest extends TestCase
         $subject = app(DatabaseRequirementsStep::class);
 
         // Act
-        $name = $subject->name();
+        $name = $subject->title();
 
         // Assert
         $this->assertEquals(
@@ -72,7 +72,7 @@ class DatabaseRequirementsStepTest extends TestCase
     public function database_requirements_step_apply_actions()
     {
         // Arrange
-        $configuration = $this->mock(UpdatesConfiguration::class);
+        $configuration = $this->mock(UpdatesEnvironment::class);
         Artisan::shouldReceive('call')
             ->withArgs(function ($command) {
                 return 'vendor:publish' === $command;
@@ -173,7 +173,7 @@ class DatabaseRequirementsStepTest extends TestCase
     public function database_requirements_step_apply_throws_a_migration_exception_if_migration_fails()
     {
         // Arrange
-        $configuration = $this->mock(UpdatesConfiguration::class);
+        $configuration = $this->mock(UpdatesEnvironment::class);
         Artisan::shouldReceive('call')
             ->withArgs(function ($command) {
                 return 'vendor:publish' === $command;

@@ -32,7 +32,7 @@ class ConnectsToDatabaseRequirementTest extends TestCase
         );
 
         // Act
-        $name = $subject->name();
+        $name = $subject->title();
 
         // Assert
         $this->assertEquals(

@@ -7,7 +7,7 @@ use GamingEngine\Installation\Server\Requirements\PHP\PHPVersionRequirement;
 
 class PHPRequirements extends BaseServerRequirement
 {
-    public function name(): string
+    public function title(): string
     {
         return (string)__(
             'gaming-engine:installation::requirements.server.php.title',

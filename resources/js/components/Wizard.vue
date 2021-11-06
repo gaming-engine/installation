@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="text-xs text-center md:text-base">
-                        {{ step.name }}
+                        {{ step.title }}
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                  v-show="step.identifier === current.identifier"
                  :key="`step-${step.identifier}-step`">
                 <h2 class="text-center d-block pb-5 font-bold text-lg">
-                    {{ step.name }}
+                    {{ step.title }}
                 </h2>
 
                 <component

@@ -17,7 +17,7 @@ class ServerRequirementsStep extends BaseStep
         return 'server';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.server.title');
     }

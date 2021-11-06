@@ -4,12 +4,13 @@ namespace GamingEngine\Installation\Settings\Requirements;
 
 use GamingEngine\Installation\Requirements\Requirement;
 use GamingEngine\Installation\Requirements\RequirementDetail;
-use GamingEngine\StringTools\StringHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class SiteDetails implements Requirement
 {
+    private Collection $components;
+
     public function __construct(private Request $request, private array $overrides = [])
     {
     }
@@ -19,7 +20,7 @@ class SiteDetails implements Requirement
         return 'configuration';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__("gaming-engine:installation::requirements.settings.site.title");
     }
@@ -37,6 +38,10 @@ class SiteDetails implements Requirement
 
     public function components(): Collection
     {
+        if (isset($this->components)) {
+            return $this->components;
+        }
+
         $components = collect([
             new SiteConfigurationValue([
                 'attribute' => 'name',
@@ -45,7 +50,7 @@ class SiteDetails implements Requirement
             ]),
             new SiteConfigurationValue([
                 'attribute' => 'domain',
-                'value' => $this->deriveUrl(),
+                'value' => $this->request->getHost(),
                 'nullable' => false,
             ]),
         ])->keyBy(fn (SiteConfigurationValue $value) => $value->attribute());
@@ -54,17 +59,20 @@ class SiteDetails implements Requirement
             $components[$key]->override($value);
         }
 
-        return $components;
+        return $this->components = $components;
     }
 
-    private function deriveUrl(): string
+    public function siteName(): ?string
     {
-        return StringHelper::template(
-            '{scheme}://{hostname}',
-            [
-                'scheme' => $this->request->getScheme(),
-                'hostname' => $this->request->getHost(),
-            ]
-        );
+        return $this->components()
+            ->first(fn (SiteConfigurationValue $value) => 'name' === $value->attribute())
+            ->value();
+    }
+
+    public function domain(): string
+    {
+        return $this->components()
+            ->first(fn (SiteConfigurationValue $value) => 'domain' === $value->attribute())
+            ->value() ?? $this->request->getHost();
     }
 }

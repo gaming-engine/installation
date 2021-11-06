@@ -21,7 +21,7 @@ class DatabaseConfigurationRequirementsTest extends TestCase
         $subject = new DatabaseConfigurationRequirements();
 
         // Act
-        $name = $subject->name();
+        $name = $subject->title();
 
         // Assert
         $this->assertEquals(

@@ -34,7 +34,7 @@ class ServerRequirementsControllerTest extends TestCase
         $requirements
             ->checks()
             ->each(function (Requirement $requirement) use ($response) {
-                $response->assertSeeText($requirement->name());
+                $response->assertSeeText($requirement->title());
             });
     }
 

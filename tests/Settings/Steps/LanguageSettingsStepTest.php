@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Tests\Settings\Steps;
 
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Settings\Requirements\LanguageSettings;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
 use GamingEngine\Installation\Tests\TestCase;
@@ -39,7 +39,7 @@ class LanguageSettingsStepTest extends TestCase
         $subject = app(LanguageSettingsStep::class);
 
         // Act
-        $result = $subject->name();
+        $result = $subject->title();
 
         // Assert
         $this->assertEquals(
@@ -101,7 +101,7 @@ class LanguageSettingsStepTest extends TestCase
     {
         // Arrange
         $subject = new LanguageSettingsStep(
-            $writer = $this->mock(UpdatesConfiguration::class)
+            $writer = $this->mock(UpdatesEnvironment::class)
         );
 
         $writer->shouldReceive('update')

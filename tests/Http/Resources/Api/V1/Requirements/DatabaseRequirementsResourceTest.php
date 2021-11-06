@@ -1,6 +1,6 @@
 <?php
 
-namespace GamingEngine\Installation\Tests\Api\V1\Requirements;
+namespace GamingEngine\Installation\Tests\Http\Resources\Api\V1\Requirements;
 
 use GamingEngine\Installation\Database\Http\Resources\Api\V1\DatabaseRequirementResource;
 use GamingEngine\Installation\Database\Requirements\DatabaseConfigurationRequirements;

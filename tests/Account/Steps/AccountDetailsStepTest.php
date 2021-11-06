@@ -44,7 +44,7 @@ class AccountDetailsStepTest extends TestCase
         // Assert
         $this->assertEquals(
             __('gaming-engine:installation::requirements.account.configuration.title'),
-            $subject->name()
+            $subject->title()
         );
     }
 

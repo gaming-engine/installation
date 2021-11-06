@@ -24,7 +24,7 @@ class LanguageConfigurationValueTest extends TestCase
         ]);
 
         // Act
-        $result = $subject->name();
+        $result = $subject->title();
 
         // Assert
         $this->assertEquals(

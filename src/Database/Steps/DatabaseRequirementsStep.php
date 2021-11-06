@@ -7,7 +7,7 @@ use GamingEngine\Installation\Database\Exceptions\MigrationException;
 use GamingEngine\Installation\Database\Exceptions\PublishException;
 use GamingEngine\Installation\Database\Requirements\ConnectsToDatabaseRequirement;
 use GamingEngine\Installation\Database\Requirements\DatabaseConfigurationRequirements;
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Models\Database\DatabaseConfiguration;
 use GamingEngine\Installation\Requirements\Configuration\EnvironmentConfigurationValue;
 use GamingEngine\Installation\Requirements\Requirement;
@@ -20,7 +20,7 @@ class DatabaseRequirementsStep extends BaseConfigurationStep
 {
     public function __construct(
         private ChecksDatabaseConnection $databaseConnection,
-        private UpdatesConfiguration $configuration
+        private UpdatesEnvironment $configuration
     ) {
         parent::__construct();
     }
@@ -30,7 +30,7 @@ class DatabaseRequirementsStep extends BaseConfigurationStep
         return 'database';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.database.title');
     }
@@ -45,29 +45,6 @@ class DatabaseRequirementsStep extends BaseConfigurationStep
         $this->publishSeeders();
         $this->updateConfiguration();
         $this->migrateDatabase();
-    }
-
-    /**
-     * @return Collection<Requirement>
-     */
-    public function checks(): Collection
-    {
-        $databaseConfiguration = new DatabaseConfigurationRequirements(
-            $this->overrides
-        );
-
-        return collect([
-            $databaseConfiguration,
-            new ConnectsToDatabaseRequirement(
-                $this->databaseConnection,
-                new DatabaseConfiguration(
-                    $databaseConfiguration->components()
-                        ->keyBy(fn (EnvironmentConfigurationValue $value) => $value->attribute())
-                        ->map(fn (EnvironmentConfigurationValue $value) => $value->value())
-                        ->toArray()
-                )
-            ),
-        ]);
     }
 
     private function publishMigrations(): void
@@ -107,6 +84,29 @@ class DatabaseRequirementsStep extends BaseConfigurationStep
                 ->toArray(),
             'database'
         );
+    }
+
+    /**
+     * @return Collection<Requirement>
+     */
+    public function checks(): Collection
+    {
+        $databaseConfiguration = new DatabaseConfigurationRequirements(
+            $this->overrides
+        );
+
+        return collect([
+            $databaseConfiguration,
+            new ConnectsToDatabaseRequirement(
+                $this->databaseConnection,
+                new DatabaseConfiguration(
+                    $databaseConfiguration->components()
+                        ->keyBy(fn (EnvironmentConfigurationValue $value) => $value->attribute())
+                        ->map(fn (EnvironmentConfigurationValue $value) => $value->value())
+                        ->toArray()
+                )
+            ),
+        ]);
     }
 
     private function migrateDatabase(): void

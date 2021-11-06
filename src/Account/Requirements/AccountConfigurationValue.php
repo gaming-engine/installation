@@ -6,13 +6,13 @@ use GamingEngine\Installation\Requirements\Configuration\ConfigurationValue;
 
 class AccountConfigurationValue extends ConfigurationValue
 {
-    public function name(): string
+    public function title(): string
     {
-        return __("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.title");
+        return (string)__("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.description");
+        return (string)__("gaming-engine:installation::requirements.account.configuration.{$this->attribute}.description");
     }
 }

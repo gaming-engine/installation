@@ -9,7 +9,7 @@
                     </component>
                 </div>
 
-                <strong>{{ step.name }}</strong>
+                <strong>{{ step.title }}</strong>
 
                 <div class="inline-block float-right">
                     <spinner v-if="'processing' === status[step.identifier]" :size="5"/>

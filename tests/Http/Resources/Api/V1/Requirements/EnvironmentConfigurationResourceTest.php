@@ -20,8 +20,8 @@ class EnvironmentConfigurationResourceTest extends TestCase
         $resource = $this->mock(EnvironmentConfigurationValue::class);
         $resource->shouldReceive('attribute')
             ->andReturn($attribute = $this->faker->slug);
-        $resource->shouldReceive('name')
-            ->andReturn($name = $this->faker->name);
+        $resource->shouldReceive('title')
+            ->andReturn($title = $this->faker->name);
         $resource->shouldReceive('description')
             ->andReturn($description = $this->faker->slug);
         $resource->shouldReceive('value')
@@ -36,7 +36,7 @@ class EnvironmentConfigurationResourceTest extends TestCase
 
         // Assert
         $this->assertEquals(
-            compact('attribute', 'name', 'description', 'value', 'nullable'),
+            compact('attribute', 'title', 'description', 'value', 'nullable'),
             $response
         );
     }

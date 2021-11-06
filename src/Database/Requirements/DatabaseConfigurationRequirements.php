@@ -8,11 +8,8 @@ use Illuminate\Support\Collection;
 
 class DatabaseConfigurationRequirements implements Requirement
 {
-    private array $overrides;
-
-    public function __construct(array $overrides = [])
+    public function __construct(private array $overrides = [])
     {
-        $this->overrides = $overrides;
     }
 
     public function identifier(): string
@@ -20,14 +17,14 @@ class DatabaseConfigurationRequirements implements Requirement
         return 'configuration';
     }
 
-    public function name(): string
+    public function title(): string
     {
-        return __("gaming-engine:installation::requirements.database.configuration.title");
+        return (string)__("gaming-engine:installation::requirements.database.configuration.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.database.configuration.description");
+        return (string)__("gaming-engine:installation::requirements.database.configuration.description");
     }
 
     public function check(): bool

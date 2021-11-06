@@ -24,14 +24,14 @@ class ConnectsToDatabaseRequirement extends BaseRequirement implements Requireme
         return 'connectivity';
     }
 
-    public function name(): string
+    public function title(): string
     {
-        return __("gaming-engine:installation::requirements.database.connection.title");
+        return (string)__("gaming-engine:installation::requirements.database.connection.title");
     }
 
     public function description(): string
     {
-        return __("gaming-engine:installation::requirements.database.connection.description");
+        return (string)__("gaming-engine:installation::requirements.database.connection.description");
     }
 
     public function components(): Collection

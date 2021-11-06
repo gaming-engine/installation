@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Settings\Steps;
 
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Settings\Requirements\LanguageConfigurationValue;
 use GamingEngine\Installation\Settings\Requirements\LanguageSettings;
 use GamingEngine\Installation\Steps\BaseConfigurationStep;
@@ -10,9 +10,9 @@ use Illuminate\Support\Collection;
 
 class LanguageSettingsStep extends BaseConfigurationStep
 {
-    private UpdatesConfiguration $configuration;
+    private UpdatesEnvironment $configuration;
 
-    public function __construct(UpdatesConfiguration $configuration)
+    public function __construct(UpdatesEnvironment $configuration)
     {
         parent::__construct();
         $this->configuration = $configuration;
@@ -23,7 +23,7 @@ class LanguageSettingsStep extends BaseConfigurationStep
         return 'language';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.settings.language.title');
     }

@@ -2,6 +2,7 @@
 
 namespace GamingEngine\Installation\Tests\Http\Api\V1\Controllers;
 
+use GamingEngine\Core\Configuration\Repositories\ConfigurationRepository;
 use GamingEngine\Installation\Http\Controllers\Api\V1\StepController;
 use GamingEngine\Installation\Http\Resources\Api\V1\Steps\StepResource;
 use GamingEngine\Installation\Steps\Step;
@@ -10,6 +11,13 @@ use GamingEngine\Installation\Tests\TestCase;
 
 class StepControllerTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->mock(ConfigurationRepository::class);
+    }
+
     /**
      * @test
      */

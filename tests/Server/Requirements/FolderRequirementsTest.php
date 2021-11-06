@@ -20,7 +20,7 @@ class FolderRequirementsTest extends TestCase
         // Assert
         $this->assertEquals(
             'Folder Requirements',
-            $subject->name()
+            $subject->title()
         );
     }
 

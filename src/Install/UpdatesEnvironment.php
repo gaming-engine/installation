@@ -2,7 +2,7 @@
 
 namespace GamingEngine\Installation\Install;
 
-interface UpdatesConfiguration
+interface UpdatesEnvironment
 {
     public function update(array $values, string $backupPrefix = ''): void;
 }
