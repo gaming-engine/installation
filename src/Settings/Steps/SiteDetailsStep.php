@@ -16,8 +16,7 @@ class SiteDetailsStep extends BaseConfigurationStep
     public function __construct(
         private Request $request,
         private UpdatesEnvironment $environmentUpdater,
-        private ConfigurationRepository $configurationRepository,
-        private SiteConfiguration $siteConfiguration
+        private ConfigurationRepository $configurationRepository
     ) {
         parent::__construct();
     }
@@ -40,7 +39,7 @@ class SiteDetailsStep extends BaseConfigurationStep
 
         $this->configurationRepository->update(
             SiteConfiguration::fromConfiguration(
-                $this->siteConfiguration,
+                $this->configurationRepository->site(),
                 [
                     'name' => $this->siteDetails()->siteName(),
                 ]

@@ -1,6 +1,6 @@
 <?php
 
-namespace GamingEngine\Installation\Tests\Requirements\Server;
+namespace GamingEngine\Installation\Tests\Server\Requirements;
 
 use GamingEngine\Installation\Server\Requirements\FolderRequirements;
 use GamingEngine\Installation\Tests\TestCase;

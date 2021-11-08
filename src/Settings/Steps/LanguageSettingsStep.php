@@ -2,6 +2,8 @@
 
 namespace GamingEngine\Installation\Settings\Steps;
 
+use GamingEngine\Core\Configuration\Repositories\ConfigurationRepository;
+use GamingEngine\Core\Configuration\SiteConfiguration;
 use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Settings\Requirements\LanguageConfigurationValue;
 use GamingEngine\Installation\Settings\Requirements\LanguageSettings;
@@ -10,12 +12,10 @@ use Illuminate\Support\Collection;
 
 class LanguageSettingsStep extends BaseConfigurationStep
 {
-    private UpdatesEnvironment $configuration;
-
-    public function __construct(UpdatesEnvironment $configuration)
-    {
+    public function __construct(
+        private UpdatesEnvironment $configuration,
+    ) {
         parent::__construct();
-        $this->configuration = $configuration;
     }
 
     public function identifier(): string
@@ -59,5 +59,19 @@ class LanguageSettingsStep extends BaseConfigurationStep
         $this->configuration->update([
             $locale->environmentVariable() => $locale->value(),
         ], 'language');
+
+        $this->configurationRepository()->update(
+            SiteConfiguration::fromConfiguration(
+                $this->configurationRepository()->site(),
+                [
+                    'name' => $locale->value(),
+                ]
+            )
+        );
+    }
+
+    private function configurationRepository(): ConfigurationRepository
+    {
+        return app(ConfigurationRepository::class);
     }
 }
