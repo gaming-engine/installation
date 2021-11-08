@@ -211,6 +211,8 @@ describe('database requirements step', () => {
               ...sampleValidations,
               connectivity: {
                 is_complete: false,
+                description: 'hi',
+                title: 'validation',
               },
             },
             resources: {
