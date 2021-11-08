@@ -77,6 +77,9 @@ Route::prefix('site-details')
         Route::get('requirements', [SiteDetailsController::class, 'index'])
             ->name('requirements');
 
+        Route::post('requirements', [SiteDetailsController::class, 'store'])
+            ->name('requirements.update');
+
         Route::put('requirements', [SiteDetailsController::class, 'apply'])
             ->name('requirements.apply');
     });

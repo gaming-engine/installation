@@ -53,38 +53,18 @@
             class="mb-3"
         />
 
-        <div
+        <warning-alert
             v-if="!form.password"
-            class="
-            bg-blue-100
-            border-l-4
-            border-blue-500
-            text-blue-700
-            p-4
-            mb-4
-            "
-            role="alert"
-        >
-            <p class="font-bold">{{ configurations.password.title }}</p>
-            <p>{{ resources.configuration.password.warning }}</p>
-        </div>
+            :body="configurations.password.warning"
+            :title="resources.configurations.password.title"
+        />
 
-        <div
-            v-if="!connectivity.is_complete"
-            ref="warning"
-            class="
-            bg-yellow-100
-            border-l-4
-            border-yellow-500
-            text-yellow-700
-            p-4
-            mb-4
-            "
-            role="alert"
-        >
-            <p class="font-bold">{{ connectivity.title }}</p>
-            <p>{{ connectivity.description }}</p>
-        </div>
+        <warning-alert v-if="!connectivity.is_complete"
+                       :body="connectivity.description"
+                       :title="connectivity.title"
+                   />
+
+        <error-alert v-if="!connectivity.is_complete" />
 
         <div class="text-center">
             <component
@@ -105,9 +85,16 @@
 import axios from 'axios';
 import InterpretResponse from '@mixins/interpret-response';
 import HasState from '@mixins/state';
+import ErrorAlert from '@components/alert/ErrorAlert';
+import WarningAlert from '@components/alert/WarningAlert';
 
 export default {
   name: 'database-requirements',
+
+  components: {
+    ErrorAlert,
+    WarningAlert,
+  },
 
   data: () => ({
     validations: [],
