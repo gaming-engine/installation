@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 class LanguageSettingsStep extends BaseConfigurationStep
 {
     public function __construct(
-        private UpdatesEnvironment $configuration,
+        private UpdatesEnvironment $environmentUpdater,
     ) {
         parent::__construct();
     }
@@ -28,10 +28,22 @@ class LanguageSettingsStep extends BaseConfigurationStep
         return (string)__('gaming-engine:installation::requirements.settings.language.title');
     }
 
-    public function locale(): string
+    public function apply(): void
     {
-        return $this->localeConfiguration()
-                ->value() ?? 'en';
+        $locale = $this->localeConfiguration();
+
+        $this->environmentUpdater->update([
+            $locale->environmentVariable() => $locale->value(),
+        ], 'language');
+
+        $this->configurationRepository()->update(
+            SiteConfiguration::fromConfiguration(
+                $this->configurationRepository()->site(),
+                [
+                    'locale' => $this->locale(),
+                ]
+            )
+        );
     }
 
     private function localeConfiguration(): LanguageConfigurationValue
@@ -52,26 +64,14 @@ class LanguageSettingsStep extends BaseConfigurationStep
         ]);
     }
 
-    public function apply(): void
-    {
-        $locale = $this->localeConfiguration();
-
-        $this->configuration->update([
-            $locale->environmentVariable() => $locale->value(),
-        ], 'language');
-
-        $this->configurationRepository()->update(
-            SiteConfiguration::fromConfiguration(
-                $this->configurationRepository()->site(),
-                [
-                    'name' => $locale->value(),
-                ]
-            )
-        );
-    }
-
     private function configurationRepository(): ConfigurationRepository
     {
         return app(ConfigurationRepository::class);
+    }
+
+    public function locale(): string
+    {
+        return $this->localeConfiguration()
+                ->value() ?? 'en';
     }
 }
