@@ -11,7 +11,7 @@ class SiteDetails implements Requirement
 {
     private Collection $components;
 
-    public function __construct(private Request $request, private array $overrides = [])
+    public function __construct(private Request $request, public array $overrides = [])
     {
     }
 

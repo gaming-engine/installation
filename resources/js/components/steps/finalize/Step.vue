@@ -19,22 +19,10 @@
                            class="text-red-600"/>
                 </div>
 
-                <div
+                <error-alert
                     v-if="errors[step.identifier]"
-                    ref="error"
-                    class="
-                        mt-2
-                        bg-red-100
-                        border-l-4
-                        border-red-500
-                        text-red-700
-                        p-4
-                        mb-4
-                    "
-                    role="alert"
-                >
-                    {{ errors[step.identifier] }}
-                </div>
+                    :body="errors[step.identifier]"
+                />
             </li>
         </ul>
 
@@ -56,19 +44,7 @@
             </button>
         </div>
         <div v-else>
-            <div ref="success"
-                 class="
-                bg-green-100
-                border-l-4
-                border-green-500
-                text-green-700
-                p-4
-                mb-4
-                mt-4
-                "
-                 role="alert">
-                {{ resources.complete }}
-            </div>
+            <success-alert :title="resources.complete" />
 
             <a class="
                     inline-flex
@@ -90,14 +66,18 @@
 
 <script>
 import axios from 'axios';
-import Error from '@components/utilities/Error.vue';
-import Spinner from '@components/utilities/Spinner.vue';
-import Complete from '@components/utilities/Complete.vue';
+import Error from '@components/utilities/Error';
+import Spinner from '@components/utilities/Spinner';
+import Complete from '@components/utilities/Complete';
+import ErrorAlert from '@components/alert/ErrorAlert';
+import SuccessAlert from '@components/alert/SuccessAlert';
 
 export default {
   name: 'finalize-installation',
 
   components: {
+    ErrorAlert,
+    SuccessAlert,
     Complete,
     Error,
     Spinner,

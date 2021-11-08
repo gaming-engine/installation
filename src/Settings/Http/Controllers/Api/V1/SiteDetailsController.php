@@ -35,11 +35,11 @@ class SiteDetailsController extends Controller
             $this->step->apply();
 
             return response()
-                ->noContent();
+              ->noContent();
         } catch (Exception $e) {
             return response([
-                'error' => $e->getMessage(),
-            ], 500);
+              'error' => $e->getMessage(),
+          ], 500);
         }
     }
 }
