@@ -60,11 +60,10 @@
         />
 
         <warning-alert v-if="!connectivity.is_complete"
+                       ref="warning"
                        :body="connectivity.description"
                        :title="connectivity.title"
                    />
-
-        <error-alert v-if="!connectivity.is_complete" />
 
         <div class="text-center">
             <component
@@ -85,14 +84,12 @@
 import axios from 'axios';
 import InterpretResponse from '@mixins/interpret-response';
 import HasState from '@mixins/state';
-import ErrorAlert from '@components/alert/ErrorAlert';
 import WarningAlert from '@components/alert/WarningAlert';
 
 export default {
   name: 'database-requirements',
 
   components: {
-    ErrorAlert,
     WarningAlert,
   },
 
