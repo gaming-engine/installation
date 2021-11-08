@@ -103,7 +103,7 @@ return [
             "description" => "Customize your Site",
             "domain" => [
                 "description" => "What should the users type into their browsers to see your site?",
-                "title" => "Address",
+                "title" => "Address (Domain Name)",
             ],
             "name" => [
                 "description" => "What would you like people to call your site?",
