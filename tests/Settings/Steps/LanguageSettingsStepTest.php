@@ -2,6 +2,8 @@
 
 namespace GamingEngine\Installation\Tests\Settings\Steps;
 
+use GamingEngine\Core\Configuration\Repositories\ConfigurationRepository;
+use GamingEngine\Core\Configuration\SiteConfiguration;
 use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Settings\Requirements\LanguageSettings;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
@@ -100,9 +102,31 @@ class LanguageSettingsStepTest extends TestCase
     public function language_settings_step_apply_updates_the_configuration()
     {
         // Arrange
-        $subject = new LanguageSettingsStep(
-            $writer = $this->mock(UpdatesEnvironment::class)
+        $configurationRepository = $this->spy(ConfigurationRepository::class);
+        $writer = $this->mock(UpdatesEnvironment::class);
+
+        $site = new SiteConfiguration(collect());
+
+        $configurationRepository->expects('site')
+            ->once()
+            ->andReturn($site);
+
+        $configurationRepository->expects('update')
+            ->once()
+            ->andReturn($site);
+
+        $subject = $this->getMockForAbstractClass(
+            LanguageSettingsStep::class,
+            arguments: [$writer],
+            mockedMethods: [
+                'overrides',
+            ],
         );
+
+        $subject->method('overrides')
+            ->willReturn([
+                'locale' => 'en',
+            ]);
 
         $writer->shouldReceive('update')
             ->withArgs(
