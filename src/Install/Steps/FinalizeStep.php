@@ -2,14 +2,14 @@
 
 namespace GamingEngine\Installation\Install\Steps;
 
-use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Steps\BaseStep;
 use GamingEngine\Installation\Steps\StepCollection;
 use Illuminate\Support\Collection;
 
 class FinalizeStep extends BaseStep
 {
-    public function __construct(private UpdatesConfiguration $configuration, private StepCollection $steps)
+    public function __construct(private UpdatesEnvironment $configuration, private StepCollection $steps)
     {
     }
 
@@ -18,7 +18,7 @@ class FinalizeStep extends BaseStep
         return 'finalize';
     }
 
-    public function name(): string
+    public function title(): string
     {
         return (string)__('gaming-engine:installation::requirements.finalize.title');
     }
@@ -34,8 +34,8 @@ class FinalizeStep extends BaseStep
     public function isComplete(): bool
     {
         return 0 === $this->steps->all()
-            ->filter(fn ($step) => ! $step->isComplete())
-            ->count();
+                ->filter(fn ($step) => ! $step->isComplete())
+                ->count();
     }
 
     public function apply(): void
