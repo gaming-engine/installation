@@ -69,8 +69,12 @@
             <p>{{ resources.configuration.password.warning }}</p>
         </div>
 
+        <div v-if="'error' === state">
+
+        </div>
+
         <div
-            v-if="!connectivity.is_complete"
+            v-if="!connectivity.is_complete && 'idle' === state"
             ref="warning"
             class="
             bg-yellow-100
@@ -174,6 +178,10 @@ export default {
       }
 
       this.setState('idle');
+
+      if (!this.connectivity.is_complete) {
+        this.setState('error');
+      }
     },
   },
 
