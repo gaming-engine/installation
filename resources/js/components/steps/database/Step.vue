@@ -6,7 +6,7 @@
             v-model="form.engine"
             :description="configurations.engine.description"
             :disabled="disabled"
-            :label="configurations.engine.name"
+            :label="configurations.engine.title"
             :options="databaseOptions"
             :required="!configurations.engine.nullable"
             class="mb-3"
@@ -17,7 +17,7 @@
             v-model="form.host"
             :description="configurations.host.description"
             :disabled="disabled"
-            :label="configurations.host.name"
+            :label="configurations.host.title"
             :required="!configurations.host.nullable"
             class="mb-3"
         />
@@ -27,7 +27,7 @@
             v-model="form['database-name']"
             :description="configurations['database-name'].description"
             :disabled="disabled"
-            :label="configurations['database-name'].name"
+            :label="configurations['database-name'].title"
             :required="!configurations['database-name'].nullable"
             class="mb-3"
         />
@@ -37,7 +37,7 @@
             v-model="form.username"
             :description="configurations.username.description"
             :disabled="disabled"
-            :label="configurations.username.name"
+            :label="configurations.username.title"
             :required="!configurations.username.nullable"
             class="mb-3"
         />
@@ -47,48 +47,23 @@
             v-model="form.password"
             :description="configurations.password.description"
             :disabled="disabled"
-            :label="configurations.password.name"
+            :label="configurations.password.title"
             :required="!configurations.password.nullable"
             autocomplete="database-password"
             class="mb-3"
         />
 
-        <div
-            v-if="!form.password"
-            class="
-            bg-blue-100
-            border-l-4
-            border-blue-500
-            text-blue-700
-            p-4
-            mb-4
-            "
-            role="alert"
-        >
-            <p class="font-bold">{{ configurations.password.name }}</p>
-            <p>{{ resources.configuration.password.warning }}</p>
-        </div>
+        <information-alert v-if="!form.password"
+                           :body="resources.configuration.password.warning"
+                           :title="configurations.password.name"
+        />
 
-        <div v-if="'error' === state">
-
-        </div>
-
-        <div
-            v-if="!connectivity.is_complete && 'idle' === state"
-            ref="warning"
-            class="
-            bg-yellow-100
-            border-l-4
-            border-yellow-500
-            text-yellow-700
-            p-4
-            mb-4
-            "
-            role="alert"
-        >
-            <p class="font-bold">{{ connectivity.name }}</p>
-            <p>{{ connectivity.description }}</p>
-        </div>
+        <warning-alert
+            v-if="(!connectivity.is_complete
+                || ['idle', 'error'].includes(state)) && connectionError"
+            :body="connectivity.description"
+            :title="connectivity.name"
+        />
 
         <div class="text-center">
             <component
@@ -107,17 +82,21 @@
 
 <script>
 import axios from 'axios';
-import InterpretResponse from '../../../mixins/interpret-response';
-import HasState from '../../../mixins/state';
+import InterpretResponse from '@mixins/interpret-response';
+import HasState from '@mixins/state';
+import InformationAlert from '@components/alert/InformationAlert';
+import WarningAlert from '@components/alert/WarningAlert';
 
 export default {
   name: 'database-requirements',
+  components: { InformationAlert, WarningAlert },
 
   data: () => ({
     validations: [],
     configurations: {},
     form: {},
     resources: {},
+    connectionError: false,
   }),
 
   mixins: [InterpretResponse, HasState],
@@ -137,7 +116,7 @@ export default {
     },
 
     disabled() {
-      return 'idle' !== this.state;
+      return !['idle', 'error'].includes(this.state);
     },
 
     connectivity() {
@@ -156,7 +135,12 @@ export default {
       await axios.get(this.url)
     ).data;
 
-    this.processResponse(data);
+    await this.processResponse(data);
+
+    if (!this.connectivity?.is_complete) {
+      this.connectionError = true;
+      this.setState('error');
+    }
   },
 
   methods: {
@@ -179,7 +163,8 @@ export default {
 
       this.setState('idle');
 
-      if (!this.connectivity.is_complete) {
+      if (!this.connectivity?.is_complete) {
+        this.connectionError = true;
         this.setState('error');
       }
     },
@@ -188,6 +173,10 @@ export default {
   watch: {
     connectivity(connectivity) {
       this.$emit('completed', connectivity?.is_complete);
+    },
+
+    'form.password': function () {
+      this.connectionError = false;
     },
   },
 };

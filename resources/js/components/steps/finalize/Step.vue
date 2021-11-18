@@ -1,7 +1,7 @@
 <template>
     <div class="md:w-1/2 m-auto">
         <ul class="ml-5">
-            <li v-for="step in steps" :key="`install-${step.identifier}`">
+            <li v-for="step in sortedSteps" :key="`install-${step.identifier}`">
                 <div class="w-6 inline-block ml-3 mr-3">
                     <component :is="`${step.identifier}-icon`">{{
                             step.identifier[0].toUpperCase()
@@ -44,7 +44,7 @@
             </button>
         </div>
         <div v-else>
-            <success-alert :title="resources.complete" />
+            <success-alert :title="resources.complete"/>
 
             <a class="
                     inline-flex
@@ -100,6 +100,20 @@ export default {
 
   computed: {
     url: () => '/api/v1/installation/finalize/requirements',
+
+    sortedSteps() {
+      return [...this.steps].sort((a, b) => {
+        if ('database' === a.identifier) {
+          return -1;
+        }
+
+        if ('database' === b.identifier) {
+          return 1;
+        }
+
+        return 0;
+      });
+    },
   },
 
   async created() {
@@ -112,9 +126,9 @@ export default {
     },
 
     async refreshState() {
-      Object.keys(this.steps)
+      Object.keys(this.sortedSteps)
         .forEach((stepNumber) => {
-          const step = this.steps[stepNumber];
+          const step = this.sortedSteps[stepNumber];
           this.status[step.identifier] = 'pending';
           delete this.errors[step.identifier];
           this.stepDetails[step.identifier] = step;
@@ -129,7 +143,7 @@ export default {
         return;
       }
 
-      this.refreshState();
+      await this.refreshState();
 
       this.setState('processing');
 
