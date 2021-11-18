@@ -51,6 +51,7 @@ return [
             "title" => "Conectividad de la base de datos",
         ],
         "description" => "Para que el sitio funcione, se necesita una base de datos para almacenar toda la información.",
+        "error" => ["description" => "", "title" => ""],
         "title" => "Requisitos de la base de datos",
     ],
     "finalize" => [

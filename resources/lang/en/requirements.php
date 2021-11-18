@@ -48,6 +48,10 @@ return [
             "title" => "Database Connectivity",
         ],
         "description" => "In order to run the site, a database is required to store all of the information.",
+        "error" => [
+            "description" => "Tried to connect to the database.  Do you have the settings correct?",
+            "title" => "Error Connecting to Database",
+        ],
         "title" => "Database Requirements",
     ],
     "finalize" => [
