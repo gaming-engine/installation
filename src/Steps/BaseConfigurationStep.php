@@ -27,7 +27,7 @@ abstract class BaseConfigurationStep extends BaseStep implements ConfigurationSt
 
     private function overrideFile(): string
     {
-        return 'installation/' . md5(static::class);
+        return 'installation/' . md5(get_class($this));
     }
 
     /**

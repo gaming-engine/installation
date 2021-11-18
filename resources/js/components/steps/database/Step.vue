@@ -53,17 +53,18 @@
             class="mb-3"
         />
 
-        <warning-alert
-            v-if="!form.password"
-            :body="configurations.password.warning"
-            :title="resources.configurations.password.title"
+        <information-alert v-if="!form.password"
+                           :body="resources.configuration.password.warning"
+                           :title="configurations.password.name"
         />
 
-        <warning-alert v-if="!connectivity.is_complete"
-                       ref="warning"
-                       :body="connectivity.description"
-                       :title="connectivity.title"
-                   />
+        <warning-alert
+            v-if="(!connectivity.is_complete
+                || ['idle', 'error'].includes(state))"
+            ref="warning"
+            :body="connectivity.description"
+            :title="connectivity.name"
+        />
 
         <div class="text-center">
             <component
@@ -84,14 +85,12 @@
 import axios from 'axios';
 import InterpretResponse from '@mixins/interpret-response';
 import HasState from '@mixins/state';
+import InformationAlert from '@components/alert/InformationAlert';
 import WarningAlert from '@components/alert/WarningAlert';
 
 export default {
   name: 'database-requirements',
-
-  components: {
-    WarningAlert,
-  },
+  components: { InformationAlert, WarningAlert },
 
   data: () => ({
     validations: [],
@@ -117,7 +116,7 @@ export default {
     },
 
     disabled() {
-      return 'idle' !== this.state;
+      return !['idle', 'error'].includes(this.state);
     },
 
     connectivity() {
@@ -136,7 +135,11 @@ export default {
       await axios.get(this.url)
     ).data;
 
-    this.processResponse(data);
+    await this.processResponse(data);
+
+    if (!this.connectivity?.is_complete) {
+      this.setState('error');
+    }
   },
 
   methods: {
@@ -154,16 +157,24 @@ export default {
 
         this.processResponse(data);
       } catch (error) {
-        console.log(error);
+        this.setState('error');
       }
 
       this.setState('idle');
+
+      if (!this.connectivity?.is_complete) {
+        this.setState('error');
+      }
     },
   },
 
   watch: {
     connectivity(connectivity) {
       this.$emit('completed', connectivity?.is_complete);
+    },
+
+    'form.password': function () {
+      this.connectionError = false;
     },
   },
 };

@@ -51,6 +51,7 @@ return [
             "title" => "Connectivité des bases de données",
         ],
         "description" => "Afin de faire fonctionner le site, une base de données est nécessaire pour stocker toutes les informations.",
+        "error" => ["description" => "", "title" => ""],
         "title" => "Exigences relatives aux bases de données",
     ],
     "finalize" => [
