@@ -4,6 +4,7 @@ namespace GamingEngine\Installation\Tests\Install\Steps;
 
 use GamingEngine\Installation\Install\Steps\FinalizeStep;
 use GamingEngine\Installation\Install\UpdatesConfiguration;
+use GamingEngine\Installation\Steps\StepCollection;
 use GamingEngine\Installation\Tests\TestCase;
 
 class FinalizeStepTest extends TestCase
@@ -69,7 +70,7 @@ class FinalizeStepTest extends TestCase
     {
         // Arrange
         $configuration = $this->mock(UpdatesConfiguration::class);
-        $subject = new FinalizeStep($configuration);
+        $subject = new FinalizeStep($configuration, new StepCollection([]));
 
         $configuration->shouldReceive('update')
             ->withArgs(
