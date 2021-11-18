@@ -41,6 +41,8 @@ describe('database requirements step', () => {
   const sampleValidations = {
     connectivity: {
       is_complete: true,
+      description: 'hi',
+      title: 'validation',
     },
   };
 
@@ -141,6 +143,20 @@ describe('database requirements step', () => {
               },
             },
           },
+        });
+
+        const { vm } = shallowMount(Step);
+
+        vm.submit();
+
+        expect(axios.post).not.toHaveBeenCalledWith(
+          '/api/v1/installation/database/requirements',
+        );
+      });
+
+      it('ignores the error if it happens', () => {
+        axios.post.mockImplementation(() => {
+          throw new Error('testing');
         });
 
         const { vm } = shallowMount(Step);

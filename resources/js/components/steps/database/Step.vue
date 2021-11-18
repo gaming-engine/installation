@@ -60,7 +60,8 @@
 
         <warning-alert
             v-if="(!connectivity.is_complete
-                || ['idle', 'error'].includes(state)) && connectionError"
+                || ['idle', 'error'].includes(state))"
+            ref="warning"
             :body="connectivity.description"
             :title="connectivity.name"
         />
@@ -96,7 +97,6 @@ export default {
     configurations: {},
     form: {},
     resources: {},
-    connectionError: false,
   }),
 
   mixins: [InterpretResponse, HasState],
@@ -138,7 +138,6 @@ export default {
     await this.processResponse(data);
 
     if (!this.connectivity?.is_complete) {
-      this.connectionError = true;
       this.setState('error');
     }
   },
@@ -158,13 +157,12 @@ export default {
 
         this.processResponse(data);
       } catch (error) {
-        console.log(error);
+        this.setState('error');
       }
 
       this.setState('idle');
 
       if (!this.connectivity?.is_complete) {
-        this.connectionError = true;
         this.setState('error');
       }
     },
