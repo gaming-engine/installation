@@ -17,7 +17,7 @@ use GamingEngine\Installation\Install\UpdatesEnvironment;
 use GamingEngine\Installation\Module\InstallationModule;
 use GamingEngine\Installation\Server\Steps\ServerRequirementsStep;
 use GamingEngine\Installation\Settings\Steps\LanguageSettingsStep;
-use GamingEngine\Installation\Settings\Steps\SiteDetailsStep;
+use GamingEngine\Installation\Steps\FullStepCollection;
 use GamingEngine\Installation\Steps\StepCollection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
@@ -63,17 +63,24 @@ class InstallationServiceProvider extends PackageServiceProvider
 
     private function loadInstallationSteps(): void
     {
+        $steps = [
+            app(LanguageSettingsStep::class),
+            app(ServerRequirementsStep::class),
+            app(DatabaseRequirementsStep::class),
+            app(AccountDetailsStep::class),
+        ];
+
         $this->app->singleton(
             StepCollection::class,
-            fn () => new StepCollection(
-                [
-                    app(LanguageSettingsStep::class),
-                    app(ServerRequirementsStep::class),
-                    app(DatabaseRequirementsStep::class),
-                    app(SiteDetailsStep::class),
-                    app(AccountDetailsStep::class),
+            fn () => new StepCollection($steps)
+        );
+
+        $this->app->singleton(
+            FullStepCollection::class,
+            fn () => new FullStepCollection(
+                array_merge($steps, [
                     app(FinalizeStep::class),
-                ]
+                ])
             )
         );
     }
