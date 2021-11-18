@@ -54,7 +54,7 @@
         "vue3-jest": "^27.0.0-alpha.1"
     },
     "dependencies": {
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "lodash": "^4.17.19",
         "moment": "^2.10.6",
         "moment-timezone": "^0.5.21",
