@@ -6,7 +6,7 @@
             v-model="form.engine"
             :description="configurations.engine.description"
             :disabled="disabled"
-            :label="configurations.engine.title"
+            :label="configurations.engine.name"
             :options="databaseOptions"
             :required="!configurations.engine.nullable"
             class="mb-3"
@@ -17,7 +17,7 @@
             v-model="form.host"
             :description="configurations.host.description"
             :disabled="disabled"
-            :label="configurations.host.title"
+            :label="configurations.host.name"
             :required="!configurations.host.nullable"
             class="mb-3"
         />
@@ -27,7 +27,7 @@
             v-model="form['database-name']"
             :description="configurations['database-name'].description"
             :disabled="disabled"
-            :label="configurations['database-name'].title"
+            :label="configurations['database-name'].name"
             :required="!configurations['database-name'].nullable"
             class="mb-3"
         />
@@ -37,7 +37,7 @@
             v-model="form.username"
             :description="configurations.username.description"
             :disabled="disabled"
-            :label="configurations.username.title"
+            :label="configurations.username.name"
             :required="!configurations.username.nullable"
             class="mb-3"
         />
@@ -47,23 +47,48 @@
             v-model="form.password"
             :description="configurations.password.description"
             :disabled="disabled"
-            :label="configurations.password.title"
+            :label="configurations.password.name"
             :required="!configurations.password.nullable"
             autocomplete="database-password"
             class="mb-3"
         />
 
-        <warning-alert
+        <div
             v-if="!form.password"
-            :body="configurations.password.warning"
-            :title="resources.configurations.password.title"
-        />
+            class="
+            bg-blue-100
+            border-l-4
+            border-blue-500
+            text-blue-700
+            p-4
+            mb-4
+            "
+            role="alert"
+        >
+            <p class="font-bold">{{ configurations.password.name }}</p>
+            <p>{{ resources.configuration.password.warning }}</p>
+        </div>
 
-        <warning-alert v-if="!connectivity.is_complete"
-                       ref="warning"
-                       :body="connectivity.description"
-                       :title="connectivity.title"
-                   />
+        <div v-if="'error' === state">
+
+        </div>
+
+        <div
+            v-if="!connectivity.is_complete && 'idle' === state"
+            ref="warning"
+            class="
+            bg-yellow-100
+            border-l-4
+            border-yellow-500
+            text-yellow-700
+            p-4
+            mb-4
+            "
+            role="alert"
+        >
+            <p class="font-bold">{{ connectivity.name }}</p>
+            <p>{{ connectivity.description }}</p>
+        </div>
 
         <div class="text-center">
             <component
@@ -82,16 +107,11 @@
 
 <script>
 import axios from 'axios';
-import InterpretResponse from '@mixins/interpret-response';
-import HasState from '@mixins/state';
-import WarningAlert from '@components/alert/WarningAlert';
+import InterpretResponse from '../../../mixins/interpret-response';
+import HasState from '../../../mixins/state';
 
 export default {
   name: 'database-requirements',
-
-  components: {
-    WarningAlert,
-  },
 
   data: () => ({
     validations: [],
@@ -158,6 +178,10 @@ export default {
       }
 
       this.setState('idle');
+
+      if (!this.connectivity.is_complete) {
+        this.setState('error');
+      }
     },
   },
 
