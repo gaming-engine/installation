@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const webpack = require('webpack');
 const path = require('path');
 
 /*
@@ -45,5 +44,4 @@ mix.options(options).extract()
         '@components': path.resolve(__dirname, 'resources/js/components'),
       },
     },
-    plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   });
