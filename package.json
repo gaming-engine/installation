@@ -45,7 +45,7 @@
         "jest": "^27.1.0",
         "jest-cli": "^27.1.0",
         "jest-serializer-vue": "^2.0.2",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.49",
         "lint-staged": "^11.0.0",
         "postcss": "^8.3.6",
         "prettier": "^2.3.2",
